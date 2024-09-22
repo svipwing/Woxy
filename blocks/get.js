@@ -663,6 +663,45 @@ Blockly.Blocks["alert"] = {
     },
 };
 
+Blockly.Blocks["changestyle"] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("修改id为")
+            .appendField(new Blockly.FieldTextInput("a"), "id")
+            .appendField("的属性")
+            .appendField(
+                new Blockly.FieldDropdown([
+                    ["背景色", "backgroundColor"],
+                    ["颜色", "color"],
+                    ["圆角", "borderRadius"],
+                    ["文本", "innerHTML"],
+                ]),
+                "type"
+            )
+            .appendField("的值为")
+            .appendField(new Blockly.FieldTextInput("10"), "value");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(330);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    },
+};
+
+Blockly.Blocks["change_div_html"] = {
+    init: function () {
+        this.appendStatementInput('html')
+            .appendField("修改id为")
+            .appendField(new Blockly.FieldTextInput("a"), "id")
+            .appendField("的积木的内容")
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(330);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    },
+};
+
 Blockly.Blocks["line"] = {
     init: function () {
         this.appendDummyInput().appendField("分割线");
