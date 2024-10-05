@@ -701,6 +701,30 @@ Blockly.Blocks["change_div_html"] = {
         this.setHelpUrl("");
     },
 };
+Blockly.Blocks["click"] = {
+    init: function () {
+        this.appendStatementInput('js')
+            .setCheck(null)
+            .appendField("当")
+            .appendField("id为:")
+            .appendField(new Blockly.FieldTextInput("id"), "id")
+            .appendField("的标签被")
+            .appendField(
+                new Blockly.FieldDropdown([
+                    ["点击", "click"],
+                    ["双击", "dblclick"],
+                    ["移入标签", "mouseover"],
+                    ["移出标签", "mouseout"],
+                ]),
+                "type"
+            );;
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(330);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    },
+};
 
 Blockly.Blocks["line"] = {
     init: function () {

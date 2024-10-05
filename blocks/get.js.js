@@ -385,10 +385,19 @@ Blockly.JavaScript['changestyle'] = function (block) {
     return code;
 };
 
+
 Blockly.JavaScript['change_div_html'] = function (block) {
     var text_id = block.getFieldValue('id');
     var statements_html = Blockly.JavaScript.statementToCode(block, "html");
     var code = `document.getElementById('${text_id}').innerHTML=\`${statements_html}\`;\n`
+    return code;
+};
+
+Blockly.JavaScript['click'] = function (block) {
+    var text_id = block.getFieldValue('id');
+    var statements_js = Blockly.JavaScript.statementToCode(block, "js");
+    var dropdown_type = block.getFieldValue("type");
+    var code = `document.getElementById('${text_id}').addEventListener('${dropdown_type}',()=>{\n${statements_js}})\n`
     return code;
 };
 
