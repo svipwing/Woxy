@@ -5,17 +5,11 @@
     font-style: normal
 }
 
-.navbar,
-div#nav {
+.navbar {
     left: 0;
     width: 100%;
     padding: 10px;
     position: fixed
-}
-
-div#nav {
-    bottom: 0;
-    background-color: #f8f8f8
 }
 
 .navbar {
@@ -67,7 +61,7 @@ div#nav {
 
 #copy {
     font-family: CaskaydiaCoveNerdFont, serif;
-    font-size: 12px
+    font-size: 12px;
 }
 
 #code {
@@ -78,7 +72,7 @@ div#nav {
 body,
 html {
     width: 100%;
-    height: 100%
+    height: 100%;
 }
 
 body {
@@ -86,7 +80,7 @@ body {
 }
 
 * {
-    margin: 0
+    margin: 0;
 }
 
 #start_page {
@@ -99,16 +93,16 @@ body {
     flex-direction: column;
     color: #fff;
     position: fixed;
-    z-index: 9999
+    z-index: 9999;
 }
 
 #start_page h1 {
     margin-bottom: 20px;
-    font-size: 80px
+    font-size: 80px;
 }
 
 #start_page h3 {
-    font-size: 50px
+    font-size: 50px;
 }
 
 #qq {
@@ -116,30 +110,32 @@ body {
     bottom: 20px;
     left: 30px;
     z-index: 9998;
-    padding: 7px
+    padding: 7px;
 }
 
-#dao,
 #html_editor,
 #markdown,
 #qq {
     border-radius: 10px;
     color: #fff;
     position: fixed;
-    border: 0
+    border: 0;
 }
 
 #dao {
     top: 0;
-    right: 60px;
-    background-color: #31bdec;
-    padding: 5px;
-    font-size: 20px;
-    z-index: 9999
+    border-radius: 5px;
+    color: #ffffff;
+    position: fixed;
+    right: 20px;
+    background-color: #2f4056;
+    padding: 7px;
+    font-size: 13px;
+    z-index: 9999;
 }
 
 ::selection {
-    background-color: #fe7300
+    background-color: #fe7300;
 }
 
 #import {
@@ -158,25 +154,25 @@ body {
 
 #import h1 {
     font-size: 24px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
 }
 
 #import .input-section {
     display: flex;
     align-items: center;
-    margin-bottom: 10px
+    margin-bottom: 10px;
 }
 
 #import input[type=text] {
     flex: 1;
     padding: 5px;
-    margin-right: 10px
+    margin-right: 10px;
 }
 
 input button[type=file] {
     flex: 1;
     padding: 5px;
-    margin-right: 10px
+    margin-right: 10px;
 }
 
 #exit,
@@ -185,19 +181,19 @@ input button[type=file] {
     color: #6dbd63;
     border: 0;
     padding: 5px 10px;
-    cursor: pointer
+    cursor: pointer;
 }
 
 #import hr {
     border: 1px solid #fff;
-    margin: 10px 0
+    margin: 10px 0;
 }
 
 #take-photo,
 .gitrepo {
     z-index: 9999;
     position: fixed;
-    top: 0
+    top: 0;
 }
 
 #take-photo {
@@ -206,13 +202,12 @@ input button[type=file] {
     color: #fff;
     padding: 7px;
     font-size: 13px;
-    right: 100px
+    right: 100px;
 }
 
 #blocklyDiv {
-    position: fixed;
     width: 60%;
-    height: calc(100% - 40px);
+    height: calc(100% - 56px);
 }
 
 .blocklyFlyout {
@@ -233,6 +228,7 @@ input button[type=file] {
 #blocklyDiv {
     position: absolute;
     left: 40% !important;
+    bottom: 0;
 }
 
 #blocklyDiv .blocklyTreeRow {
@@ -255,11 +251,11 @@ input button[type=file] {
 }
 
 #blocklyDiv .blocklyTreeSeparator {
-    margin: 0
+    margin: 0;
 }
 
 .gitrepo {
-    right: 5px
+    right: 5px;
 }
 
 #box-parent {
@@ -357,7 +353,7 @@ body {
     left: 40%;
     width: 60%;
     height: calc(100% - 56px);
-    z-index: 99999999999999999999999999999999999999999999999;
+    z-index: 99999;
     display: none;
     justify-content: center;
     align-items: center;

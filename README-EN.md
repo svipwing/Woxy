@@ -1,5 +1,5 @@
-<h1 align="center">
-  Woxy - website exploitation helper
+<h1 align="center"> 
+  Woxy
 </h1>
 
 <p align="center">
@@ -7,13 +7,13 @@
 </p>
 
 <p align="center">
-  Help you develop web pages quickly, that there is no difficult web page in the world!
+  Helping you quickly develop web pages, making difficult web pages a thing of the past!
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/license/svipwing/make-website" alt="License">
+  <img src="https://img.shields.io/github/license/svipwing/woxy" alt="License">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"/>
-  <img src="https://img.shields.io/badge/Powered%20by-Jishuyun%20Team-blue"/>
+  <img src="https://img.shields.io/badge/Powered%20by-Woxy%20Team-blue"/>
 </p>
 
 <hr/>
@@ -22,57 +22,49 @@
 <img src="./image/cover.png" />
 <hr />
 <img src="./image/show.png" />
-<hr />
-<img src="https://compass.gitee.com/chart/svzp5m02.svg?metric=overview&y_trans=1&range=6M" alt="OSS Compass Analyze" />
 </center>
 
-#### Notice
+#### Announcement
 
-The update has been restored, and new features will be released during the summer vacation, so stay tuned!
+The summer update plan has been launched.
 
-#### Software architecture
+#### Software Architecture
 
-Based on Google Blockly, using the jQuery framework, using the GPL3.0 open source license, please strictly abide by the relevant terms, we will reserve the right to pursue legal responsibility!
+Developed based on Google Blockly, licensed under GPL-3.
 
-#### Install
+#### Installation Guide
 
-1. Download the release (if it hasn't been updated for a long time, pull the master branch of the latest repository as the source code, and delete the `.git` directory)
-2. Unzip to Server/Local
-3. Visit 'index.html' to get started
+1. Download the release (if it has not been updated for a long time, please pull the latest `master` branch from the repository as the source code, and delete the `.git` directory).
+2. Extract it to your host.
+3. Open `index.html` to start using.
 
-#### Use
+#### Usage Instructions
 
-1. Drag and drop the bricks to program
-2. Click "Run Code" to see the effect and then adjust it
-3. Once you're done, click "Generate Code" and copy the code to an HTML file
+1. Drag and drop blocks to program.
+2. Click **Run Code** to see the effect, then adjust as needed.
+3. Once finished, click **Generate Code** and copy the code into an HTML file.
 
-#### Precautions
+#### Notes
 
-1. If you are using it for the first time or if you encounter any problems, please refer to the "Beginner's Guide", or add QQ group: 135452025
-2. The tool is in the development stage, unfinished, and is currently only for beginners to learn, please do not use it in production! The production environment is complex and changeable, and various problems may arise, and I do not assume any responsibility!
+1. For first-time use or troubleshooting, please refer to the **Beginner's Guide** or join the QQ group: 135452025.
+2. This tool is still in development, incomplete, and currently intended only for beginner learning purposes. Do not use it in production environments.
 
-#### Member
+#### Development Team
 
-1. svipwing，Creator、Developers
-2. CoolPlayLin，Developers
-3. king2022，Developers
-4. kezhixingchengxv，Instant game developers
-5. Fgaoxing，UI designer、Developers
-6. WA - Developers
-7. zaona - UI designer
-8. lokria - Developers
-9. youming - Developers
-10. zx - Developers
+1. 技术云 – Leader, Developer
+2. CoolPlayLin – Developer
+3. king2022 – Developer
+4. 可执行程序 – Easter Egg Developer
+5. Fgaoxing – UI Designer, Developer
+6. WA – APK Packaging Feature Developer
+7. 海藻酸钠 – Official Website Designer, Developer
+8. 青柠 – Backend Developer, responsible for account system and cloud projects
+9. 酶游明 – Frontend Developer, UI Optimization
+10. zx – Frontend Developer, Block Addition
 
-#### Github repo status
+#### Contribution Guide
 
-[![Stargazers repo roster for @svipwing/make-website](https://reporoster.com/stars/svipwing/make-website)](https://github.com/svipwing/make-website/stargazers)
-[![Forkers repo roster for @svipwing/make-website](https://reporoster.com/forks/svipwing/make-website)](https://github.com/svipwing/make-website/network/members)
-[![Star History Chart](https://coco.codemao.cn/http-widget-proxy/https@SEP@api.star-history.com/svg?repos=svipwing/make-website&type=Date)](https://star-history.com/#svipwing/make-website&Date)
-
-#### Get involved
-
-1. Fork this repo
-2. create a new branch
-3. commit your code
-4. create Pull Request
+1. Fork this repository.
+2. Create a new branch named `Feat_xxx`.
+3. Commit your code.
+4. Create a Pull Request.

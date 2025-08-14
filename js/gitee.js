@@ -1,7 +1,7 @@
 var request;
 
 request = $.ajax({
-    url: "https://coco.codemao.cn/http-widget-proxy/https@SEP@gitee.com/api/v5/repos/jsy-1/make-website/commits?page=1&per_page=5",
+    url: "https://coco.codemao.cn/http-widget-proxy/https@SEP@gitee.com/api/v5/repos/svipwing/woxy/commits?page=1&per_page=5",
     method: "GET",
     timeout: 2000,
     success: function (data) {
@@ -41,27 +41,3 @@ setTimeout(function () {
         console.log("请求超时");
     }
 }, 2000);
-
-// request = $.ajax({
-//     url: "https://coco.codemao.cn/http-widget-proxy/https@SEP@gitee.com/api/v5/repos/jsy-1/make-website/tags?sort=updated&direction=asc&page=1&per_page=100",
-//     method: "GET",
-//     timeout: 2000,
-//     success: function (data) {
-//         let text = $("#version");
-//         text.text(data.reverse()[0]["name"]);
-//     },
-//     error: function (jqXHR, textStatus, errorThrown) {
-//         if (textStatus === "timeout") {
-//             console.log("请求超时");
-//         } else {
-//             console.log("Error: " + textStatus + ", " + errorThrown);
-//         }
-//     }
-// });
-
-// setTimeout(function () {
-//     if (request) {
-//         request.abort();
-//         console.log("请求超时");
-//     }
-// }, 2000);

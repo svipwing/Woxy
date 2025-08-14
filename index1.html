@@ -11,9 +11,9 @@
     <meta name="theme-color" content="#2196f3" />
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="description" content="一个简洁、美观的图形化网页编辑器">
-    <meta name="keywords" content="网页开发,图形化,blockly,积木编程,编辑器,网页开发助手">
-    <meta name="author" content="技术云科技开发团队">
+    <meta name="description" content="一个简洁美观的图形化工具">
+    <meta name="keywords" content="网页开发,图形化,blockly,积木编程,编辑器,woxy,网页开发助手">
+    <meta name="author" content="Woxy Team">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <meta name="mobile-web-app-capable" content="yes" />
@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <s-dialog id="dialog1" style="z-index: 999999999999999999999999999999999999999999999999; overflow: hidden;">
+    <s-dialog id="dialog1" style="z-index: 999; overflow: hidden;">
         <div slot="headline"> 导入 / 导出 </div>
         <div>此功能用于积木数据操作，点击右下角的 按钮“关闭” 关闭对话框</div>
         <br>
@@ -115,21 +115,14 @@
 
     <script src="./js/icon.js"></script>
     <div id="start_page">
-        <h1>网页开发助手</h1>
+        <h1>Woxy</h1>
         <h3 id="text"></h3>
-        <div style="position: fixed;bottom: 5px;right: 15px;">
-            <p style="margin-bottom: 0;font-size: 20px;">创始人亲笔乱画：</p>
-            <img src="./image/svipwing.svg" width="150px" height="100px" />
-        </div>
     </div>
-
-    <a class="gitrepo" href="https://gitee.com/jsy-1/make-website"><img alt="Fork me on Gitee"
-            src="https://gitee.com/jsy-1/make-website/widgets/widget_5.svg"></a>
 
     <button id="qq">遇到问题?</button>
 
     <button id="dao" data-intro="这里可以导入和导出积木数据，方便储存" data-title="导入导出"
-        onclick="document.querySelector('#dialog1').show()">导</button>
+        onclick="document.querySelector('#dialog1').show()">导入/导出</button>
 
     <button id="take-photo" data-intro="点击此处将你的效果预览区截图并保存，分享给你的好友" data-title="预览区截图">拍照</button>
 
@@ -141,7 +134,7 @@
                     <img src="./image/logo_new.png" width="30px" height="30px"
                         style="margin-left: 2px;margin-right: 10px;" />
                 </li>
-                <li><b style="margin-right: 10px;">网页开发助手</b><b style="margin-right: 25px;"> </b></li>
+                <li><b style="margin-right: 10px;">Woxy</b><b style="margin-right: 25px;"> </b></li>
 
                 <li><b style="margin-right: 10px;">|</b></li>
                 <s-popup-menu style="border: white; z-index: 9999; border-radius: 12px;">
@@ -1200,11 +1193,6 @@
             </center>
 
         </div>
-        <div class="move-card" onclick="show(4,this);"></div>
-
-        <center>
-            <p>第三大标题</p>
-        </center>
 
     </div>
     </div>
@@ -1246,12 +1234,6 @@
     <script src="./workspace/workspace.js"></script>
 
     <script src="./js/move_block.js"></script>
-
-    <div id="nav">
-        <h5 id="copy">
-            Copyright (C) 2020-<span id="years"></span> JSY Developer Team.
-        </h5>
-    </div>
 
     <script>Prism.highlightAll();</script>
 
@@ -1305,15 +1287,6 @@
                 style="padding: 7px;border-radius: 10px;background-color: #c83333;border: 0;width: 70px;color: white;margin-left: 10%;">取消</button>
         </div>
     </div>
-
-    <script>
-        window.onload = () => {
-            now = new Date();
-            document.getElementById("years").innerHTML = now.getFullYear();
-
-            $("#blocklyDiv").css("margin-top", "40px");
-        };
-    </script>
 
 </body>
 

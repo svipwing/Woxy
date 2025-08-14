@@ -7,19 +7,6 @@ function intro() {
   );
 
   introJs().start();
-
-  swal({
-    title: "指引",
-    text: "是否需要打开详细的帮助文档?",
-    icon: "info",
-    buttons: ["不用了", "是的"],
-  }).then((y) => {
-    if (y) {
-      window.open("https://docs.svipwing.xyz/guide/user/help.html");
-    } else {
-      swal("好的，您可在导航栏再次打开");
-    }
-  });
 }
 
 function loadexample(id){
@@ -261,6 +248,8 @@ function runcode() {
 
 $(document).ready(function () {
 
+  $("#blocklyDiv").css("margin-top", "56px");
+
   $("#save").click(function () {
 
     if (work_open == 0) {
@@ -393,11 +382,11 @@ $(document).ready(function () {
 
   sometext = [
     "让世界上没有难做的网页！",
-    "基于Google blockly开发",
-    "jQuery简单又好用",
-    "听说vscode可以在线协作写代码",
-    '内置了一个<a style="color:pink;" href="markdown.html">markdown编辑器</a>哦！',
-    '初次使用要看<a style="color:pink;" href="help.html">帮助文档</a>哦！',
+    "基于 Google Blockly 开发",
+    "可以自由切换主题哦",
+    "退出前记得导出/保存作品哦",
+    '遇到问题可以点左下角加入 QQ 群',
+    '云作品功能已上线',
   ];
   $("#text").html(sometext[Math.floor(Math.random() * sometext.length)]);
 
@@ -559,11 +548,7 @@ $(document).ready(function () {
       duration: 10000,
     });
   }
-
-  setTimeout(() => {
-    $("#nav").fadeOut(1000);
-  }, 1500);
-
+  
   if ($.cookie("theme") === undefined) {
     $.cookie("theme", "#2196f3");
     document.querySelector("#blocklyDiv .blocklyMainBackground").style.fill =
