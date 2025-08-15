@@ -4,7 +4,7 @@ const loginBtn = document.getElementById('login');
 const signupBtn = document.getElementById('signup');
 const login = document.getElementById('login_btn');
 const signup = document.getElementById('signup_btn');
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const loginBtn = document.getElementById('login_btn');
     loginBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -22,10 +22,10 @@ document.addEventListener('DOMContentLoaded', function() {
             transitionIn: 'fadeInDown',
             transitionOut: 'fadeOutUp',
             bodyOverflow: true,
-            onOpening: function(modal) {
+            onOpening: function (modal) {
                 $('.iziModal').css('min-width', '300px');
                 modal.startLoading();
-                setTimeout(function() {
+                setTimeout(function () {
                     modal.stopLoading()
                 }, 100)
             }
@@ -79,10 +79,10 @@ document.addEventListener('DOMContentLoaded', function() {
             transitionIn: 'fadeInDown',
             transitionOut: 'fadeOutUp',
             bodyOverflow: true,
-            onOpening: function(modal) {
+            onOpening: function (modal) {
                 $('.iziModal').css('min-width', '300px');
                 modal.startLoading();
-                setTimeout(function() {
+                setTimeout(function () {
                     modal.stopLoading()
                 }, 100)
             }
@@ -126,7 +126,7 @@ loginBtn.addEventListener('click', (e) => {
         if (element !== "slide-up") {
             parent.classList.add('slide-up')
         } else {
-            signupBtn.parentNode.classList.add('slide-up') 
+            signupBtn.parentNode.classList.add('slide-up')
             parent.classList.remove('slide-up')
         }
     })
@@ -137,7 +137,7 @@ signupBtn.addEventListener('click', (e) => {
         if (element !== "slide-up") {
             parent.classList.add('slide-up')
         } else {
-            loginBtn.parentNode.parentNode.classList.add('slide-up') 
+            loginBtn.parentNode.parentNode.classList.add('slide-up')
             parent.classList.remove('slide-up')
         }
     })
