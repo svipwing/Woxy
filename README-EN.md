@@ -51,7 +51,7 @@ Developed based on Google Blockly, licensed under GPL-3.
 
 #### Development Team
 
-1. 技术云 – Leader, Developer
+1. jishuya – Leader, Developer
 2. CoolPlayLin – Developer
 3. king2022 – Developer
 4. 可执行程序 – Easter Egg Developer
