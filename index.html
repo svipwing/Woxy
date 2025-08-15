@@ -16,14 +16,9 @@
     <link href="./css/welcome.css" rel="stylesheet" />
 
     <script src="./js/jquery.min.js"></script>
-
-    <script src="./js/jquery.cookie.js"></script>
-
-    <script src="./js/web.js"></script>
-
     <script src="./js/sweetalert.js"></script>
-
     <script src="./js/dark.js"></script>
+
 </head>
 
 <body>
@@ -138,13 +133,6 @@
         </center>
     </div>
 
-    <script>
-        window.onload = () => {
-            now = new Date();
-            document.getElementById("year").innerHTML = now.getFullYear();
-        };
-    </script>
-
     <script src="./js/sitetime.js"></script>
     <script src="./js/gitee.js"></script>
     <script src="./js/yh.js"></script>
@@ -180,15 +168,6 @@
 
         document.body.appendChild(button);
 
-        var cnt = 0;
-        document.getElementById("sitetime").addEventListener("click", function () {
-            cnt++;
-
-            if (cnt == 3) {
-                window.location = "old/index.html";
-            }
-        });
-
         function isMobile() {
             const userAgentInfo = navigator.userAgent;
             const mobileAgents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
@@ -204,8 +183,17 @@
 
         if (isMobile()) {
             $(".right").hide();
+            $('.intro').addClass("flex-col");
+            $('.group').addClass("grid-1");
+            $('body').css('padding', '16px 32px');
         }
 
+        now = new Date();
+        document.getElementById("year").innerHTML = now.getFullYear();
+
+        $("#qq").click(function () {
+            swal({ 'title': '加入QQ交流群', 'text': '群号：135452025' });
+        });
     </script>
 
 </body>

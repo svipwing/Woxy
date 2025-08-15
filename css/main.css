@@ -1,6 +1,6 @@
 @font-face {
     font-family: CaskaydiaCoveNerdFont;
-    src: url(../font/CaskaydiaCoveNerdFontMono-Bold.ttf);
+    src: url(./font/CaskaydiaCoveNerdFontMono-Bold.ttf);
     font-weight: 400;
     font-style: normal
 }
@@ -54,9 +54,9 @@ div#nav {
 
 @font-face {
     font-family: consola;
-    src: url(../font/consola.ttf);
+    src: url(./font/consola.ttf);
     font-weight: 400;
-    font-style: normal
+    font-style: normal;
 }
 
 #copy {
@@ -64,19 +64,11 @@ div#nav {
     font-size: 12px;
 }
 
-#code {
-    font-family: consola, serif
-}
-
 #start_page,
 body,
 html {
     width: 100%;
     height: 100%;
-}
-
-body {
-    background-color: #eee
 }
 
 * {
@@ -93,7 +85,7 @@ body {
     flex-direction: column;
     color: #fff;
     position: fixed;
-    z-index: 9999;
+    z-index: 99999;
 }
 
 #start_page h1 {
@@ -340,6 +332,10 @@ input button[type=file] {
 
 body {
     background-image: url(https://static.codemao.cn/pickduck/rJ74KWDs0.jpg?hash=FsP728EZjY33-BSUhdk1AAvoYiRY);
+    background-size: 100% 100%;
+    margin-top: 0;
+    bottom: 0;
+    position: absolute;
 }
 
 .g-apk-card {

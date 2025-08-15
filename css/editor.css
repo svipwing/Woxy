@@ -1,5 +1,4 @@
 #code {
-    display: none;
     height: 900px;
     position: fixed;
     top: 50px;
@@ -9,11 +8,16 @@
     color: white;
     overflow: scroll;
     padding: 50px;
-    z-index: 99;
+    z-index: 999;
+    font-family: consola, serif;
+    display: inline;
+}
+
+#codefa {
+    display: none;
 }
 
 div#look {
-    /* display: none; */
     height: 70%;
     position: absolute;
     top: calc(15% + 5px);
@@ -23,7 +27,6 @@ div#look {
     border-radius: 18px;
     padding: 10px;
     background-color: #f0f1ec;
-    /* overflow: scroll; */
 }
 
 div#look_pos {
@@ -39,7 +42,7 @@ div#look_pos {
     opacity: 0;
 }
 
-div#package_list{
+div#package_list {
     position: absolute;
     top: calc(20% + 5px);
     left: 1.25%;
@@ -55,7 +58,7 @@ div#package_list{
     padding: 20px;
 }
 
-div#code_list{
+div#code_list {
     position: absolute;
     top: calc(10% + 5px);
     left: 21%;
@@ -73,7 +76,7 @@ div#code_list{
     margin-bottom: 8px;
 }
 
-div#package_list .move-card{
+div#package_list .move-card {
     background-color: rgb(204, 217, 227);
     height: 10%;
     width: 80%;

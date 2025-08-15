@@ -18,10 +18,8 @@
 
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="网页开发助手" />
-    <meta name="apple-mobile-web-app-title" content="网页开发助手" />
-    <link href="./css/layui.css" rel="stylesheet">
-    <script src="./js/layui.js"></script>
+    <meta name="application-name" content="Woxy" />
+    <meta name="apple-mobile-web-app-title" content="Woxy" />
 
     <link href="./css/editor.css" rel="stylesheet" />
 
@@ -40,14 +38,16 @@
 
     <script src="./js/main.js"></script>
 
-    <link href="./highlight/prism-okaidia.min.css" rel="stylesheet" />
+    <link href="./css/prism-okaidia.min.css" rel="stylesheet" />
 
-    <script src="./introjs/intro.js"></script>
-    <link href="./introjs/intro.css" rel="stylesheet" />
+    <script src="./js/intro.js"></script>
+    <link href="./css/intro.css" rel="stylesheet" />
 
-    <script src="./format/standalone.js"></script>
-    <script src="./format/plugins/html.js"></script>
+    <script src="./js/format/standalone.js"></script>
+    <script src="./js/format/plugins/html.js"></script>
     <script src="./js/sober_style.js"></script>
+
+    <script src="./js/html2canvas.js"></script>
 
     <script src="./js/crypto.js"></script>
     <link rel="stylesheet" href="https://static.codemao.cn/pickduck/rykwtwKsA.css?hash=FnOA4R-uAmCtLkbSimn8d65lAYl4">
@@ -59,8 +59,6 @@
             }, 200);
         });
     </script>
-
-    <script src="./js/html2canvas.js"></script>
 
 </head>
 
@@ -1148,7 +1146,7 @@
         <xml id="workspaceBlocks" style="display: none" xmlns="https://developers.google.com/blockly/xml"></xml>
     </div>
 
-    <pre><code id="code" class="language-html"></code></pre>
+    <pre id="codefa"><code id="code" class="language-html"></code></pre>
     <div id="look"><iframe id="look_html" width="100%" height="100%" style="border: 0;"></iframe></div>
 
     <div id="look_pos"></div>
@@ -1222,17 +1220,11 @@
     </div>
 
     <script src="./js/renderer.js"></script>
-
     <script src="./blocks/msg.js"></script>
-
     <script src="./blocks/get.js"></script>
-
     <script src="./blocks/get.js.js"></script>
-
-    <script src="./highlight/prism.min.js"></script>
-
-    <script src="./workspace/workspace.js"></script>
-
+    <script src="./js/prism.min.js"></script>
+    <script src="./blocks/workspace.js"></script>
     <script src="./js/move_block.js"></script>
 
     <script>Prism.highlightAll();</script>

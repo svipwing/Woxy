@@ -427,7 +427,7 @@ $(document).ready(function () {
     if (!c) {
       swal({
         title: "使用说明",
-        text: "您正在打开 导入/导出功能，此功能用于积木数据操作，再次点击右上角的 按钮“导” 关闭页面",
+        text: "您正在打开导入/导出功能，此功能用于积木数据操作，再次点击右上角的按钮关闭页面",
         icon: "info",
       });
     }
@@ -534,7 +534,7 @@ $(document).ready(function () {
   });
 
   $("#code_open").click(function () {
-    $("#code").toggle(1000);
+    $("#codefa").toggle();
   });
 
   $("#look_open").click(function () {
