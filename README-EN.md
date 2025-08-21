@@ -1,4 +1,4 @@
-<h1 align="center"> 
+<h1 align="center">
   Woxy
 </h1>
 
@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  Helping you quickly develop web pages, making difficult web pages a thing of the past!
+  Quickly develop websites and make web development effortless!
 </p>
 
 <p align="center">
@@ -19,52 +19,54 @@
 <hr/>
 
 <center>
-<img src="./image/cover.png" />
-<hr />
-<img src="./image/show.png" />
+  <img src="./image/cover.png" alt="Woxy Cover"/>
+  <hr/>
+  <img src="./image/show.png" alt="Woxy Demo"/>
 </center>
 
-#### Announcement
+### 📢 Announcement
 
-The summer update plan has been launched.
+The summer update plan has started. Here's a preview of the new version:
 
-#### Software Architecture
+<img src="./image/woxy-v2.0.0.png" alt="Woxy v2.0.0"/>
 
-Developed based on Google Blockly, licensed under GPL-3.
+### 🏗 Software Architecture
 
-#### Installation Guide
+Developed based on **Google Blockly**, licensed under **GPL-3**.
 
-1. Download the release (if it has not been updated for a long time, please pull the latest `master` branch from the repository as the source code, and delete the `.git` directory).
-2. Extract it to your host.
+### 💻 Installation Guide
+
+1. Download the release version (if not updated for a long time, pull the latest `master` branch as the source code and remove the `.git` folder).  
+2. Extract to your host.  
 3. Open `index.html` to start using.
 
-#### Usage Instructions
+### ⚡ Usage Instructions
 
-1. Drag and drop blocks to program.
-2. Click **Run Code** to see the effect, then adjust as needed.
-3. Once finished, click **Generate Code** and copy the code into an HTML file.
+1. Drag and drop blocks to program.  
+2. Click **Run Code** to see the result and make adjustments.  
+3. Once finished, click **Generate Code** and copy it to your HTML file.
 
-#### Notes
+### ⚠ Notes
 
-1. For first-time use or troubleshooting, please refer to the **Beginner's Guide** or join the QQ group: 135452025.
-2. This tool is still in development, incomplete, and currently intended only for beginner learning purposes. Do not use it in production environments.
+1. For first-time use or troubleshooting, please check the **Beginner’s Guide** or join the QQ group: 135452025.  
+2. This tool is still under development and is for beginner learning purposes only. **Do not use in production environments**.
 
-#### Development Team
+### 👨‍💻 Development Team
 
-1. jishuya – Leader, Developer
-2. CoolPlayLin – Developer
-3. king2022 – Developer
-4. 可执行程序 – Easter Egg Developer
-5. Fgaoxing – UI Designer, Developer
-6. WA – APK Packaging Feature Developer
-7. 海藻酸钠 – Official Website Designer, Developer
-8. 青柠 – Backend Developer, responsible for account system and cloud projects
-9. 酶游明 – Frontend Developer, UI Optimization
-10. zx – Frontend Developer, Block Addition
+- jishuya: Team leader and core developer  
+- Qingni: Backend developer, responsible for account system and cloud projects  
+- WA: Backend developer, responsible for APK packaging  
+- Haizao Suan Na: Website designer and developer  
+- Meiyou Ming: UI designer and developer  
+- zx: Frontend developer, responsible for block development  
+- Fgaoxing: UI designer and developer  
+- Executable Program: Easter egg developer  
+- CoolPlayLin: Developer  
+- king2022: Developer  
 
-#### Contribution Guide
+### 🤝 Contributing
 
-1. Fork this repository.
-2. Create a new branch named `Feat_xxx`.
-3. Commit your code.
-4. Create a Pull Request.
+1. Fork this repository  
+2. Create a `Feat_xxx` branch  
+3. Commit your code  
+4. Open a Pull Request
