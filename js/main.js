@@ -206,15 +206,12 @@ function runcode() {
 
   if (isrun == 0) {
     $("#mask").css("display", "flex");
-    $("#look").css("left", "5%");
-    $("#look").css("width", "28%");
+    $("#look").css("width", "27.5%");
   } else {
     $("#mask").css("display", "none");
-    $("#look").css("left", "14.5%");
-    $("#look").css("width", "22%");
+    $("#look").css("width", "21.5%");
   }
 
-  $("#package_list").toggle();
   $("#look_pos").toggle();
 
   if (isrun == 0) {
@@ -408,10 +405,10 @@ $(document).ready(function () {
     setTimeout(intro, 3000);
 
     $.growl.notice({
-      title: "必看提示",
+      title: "欢迎！",
       message:
-        "如果您是新手，请查看新手指引！如遇问题，请加QQ交流群，群号：135452025",
-      duration: 10000,
+        "这是您第一次访问 Woxy 编辑器！",
+      duration: 2500,
     });
     $.cookie("Starter", false);
   }
@@ -487,20 +484,12 @@ $(document).ready(function () {
     downloadText("page1.json", JSON.stringify(json));
   });
 
-  $("#qq").click(function () {
-    swal({
-      title: "提示",
-      text: "请先查看新手指引，如果还是不懂，请加QQ交流群，群号：135452025",
-      icon: "success",
-    });
-  });
-
   $("#take-photo").click(function () {
     if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
       $.growl.error({
         title: "提示",
         message:
-          "移动端不支持webrtc，即将启用html2canvas截图功能，兼容性不好，请见谅（请下载图片，而不是选择“√”按钮）",
+          "移动端不支持 webrtc，即将启用 html2canvas 截图功能，兼容性不好，请见谅（请下载图片，而不是选择 “√” 按钮）",
         duration: 5000,
       });
 

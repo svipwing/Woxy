@@ -18,11 +18,11 @@
 }
 
 div#look {
-    height: 70%;
+    height: 75%;
     position: absolute;
-    top: calc(15% + 5px);
-    left: 14.5%;
-    width: 22%;
+    top: calc(12.5% + 5px);
+    left: 5.5%;
+    width: 21.5%;
     outline: rgb(22, 93, 255) solid 2px;
     border-radius: 18px;
     padding: 10px;
@@ -36,26 +36,7 @@ div#look_pos {
     left: 14.5%;
     width: 22%;
     padding: 10px;
-    /* visibility: hidden; */
-    /* pointer-events: none; */
-    /* background-color: #1D1F21; */
     opacity: 0;
-}
-
-div#package_list {
-    position: absolute;
-    top: calc(20% + 5px);
-    left: 1.25%;
-    background-color: #ffffff65;
-    height: 60%;
-    width: 8%;
-    backdrop-filter: blur(20px);
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: start;
-    padding: 20px;
 }
 
 div#code_list {
@@ -74,27 +55,6 @@ div#code_list {
     padding: 12px;
     gap: 24px;
     margin-bottom: 8px;
-}
-
-div#package_list .move-card {
-    background-color: rgb(204, 217, 227);
-    height: 10%;
-    width: 80%;
-
-    margin-bottom: 10%;
-
-    padding: 10px;
-
-    border-radius: 18px;
-}
-
-div#package_list .move-card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    backdrop-filter: blur(20px);
-    background-color: #ffffff65;
 }
 
 div#n {

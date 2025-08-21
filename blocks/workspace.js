@@ -86,4 +86,4 @@ workspace.addChangeListener(myUpdateFunction);
 
 document.addEventListener("resize", function () {
     Blockly.svgResize(workspace);
-})
+});

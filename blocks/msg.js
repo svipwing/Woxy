@@ -335,4 +335,8 @@ msg = {
     "COLLAPSED_WARNINGS_WARNING": "已收起的信息块内包含警告。",
     "DIALOG_OK": "确认",
     "DIALOG_CANCEL": "取消"
+};
+
+for (var key in msg) {
+  Blockly.Msg[key] = msg[key];
 }
