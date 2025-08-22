@@ -414,7 +414,7 @@ $(document).ready(function () {
   }
 
   start = JSON.parse(
-    '{"blocks":{"languageVersion":0,"blocks":[{"type":"go","id":"xGW#Gs{{#%XM47~?a?mP","x":-1077,"y":-635,"fields":{"title":"hello","unicode":"utf-8"},"next":{"block":{"type":"h1","id":"|l8Nf%^q0Q@nB2%-?j^`","fields":{"text":"你好","id":"id"},"next":{"block":{"type":"h2","id":"cr-62Co(OrIvqEYx,iA%","fields":{"text":"这是一个网页","id":"id"},"next":{"block":{"type":"end","id":"5`8u45C8^slJ[PI%[ibM"}}}}}}}]}}'
+    '{"blocks":{"languageVersion":0,"blocks":[{"type":"go","id":"xGW#Gs{{#%XM47~?a?mP","x":-1308,"y":-803,"fields":{"title":"Hello World","unicode":"utf-8"},"next":{"block":{"type":"h1","id":"|l8Nf%^q0Q@nB2%-?j^`","fields":{"text":"Hello World！","id":"title"},"next":{"block":{"type":"h2","id":"cr-62Co(OrIvqEYx,iA%","fields":{"text":"欢迎来到 Woxy 编辑器！","id":"welcome"},"next":{"block":{"type":"h2","id":"3h}{`+C)cTPL+:FnyB8]","fields":{"text":"试试点击“运行代码”后，点击这段文字","id":"test"},"next":{"block":{"type":"js","id":"|dHZ+UExQ7k2hKmMbDi)","inputs":{"js":{"block":{"type":"click","id":"CVj;=)T]qhFxkB0H1JZX","fields":{"id":"test","type":"click"},"inputs":{"js":{"block":{"type":"changestyle","id":"]PIc4gx,r#UbR6FR:J,C","fields":{"id":"test","type":"color","value":"red"},"next":{"block":{"type":"changestyle","id":"Jd$NAucd=x[8Ss!4%@d:","fields":{"id":"test","type":"innerHTML","value":"好耶，你成功运行了你的第一个作品，接下来自行探索吧！"}}}}}}}}},"next":{"block":{"type":"end","id":"5`8u45C8^slJ[PI%[ibM"}}}}}}}}}}}]}}'
   );
   Blockly.serialization.workspaces.load(start, workspace);
   workspace.scrollCenter();
