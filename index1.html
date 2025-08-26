@@ -2,25 +2,21 @@
 <html lang="zh">
 
 <head>
-
     <meta charset="UTF-8" />
-
     <title>Woxy - 立即开启网页开发之旅</title>
-
     <link href="favicon.ico" rel="shortcut icon">
-    <meta name="theme-color" content="#2196f3" />
-
+    <meta name="theme-color" content="#ffffff" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="description" content="一个简洁美观的图形化工具">
     <meta name="keywords" content="网页开发,图形化,blockly,积木编程,编辑器,woxy,网页开发助手">
     <meta name="author" content="Woxy Team">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="application-name" content="Woxy" />
     <meta name="apple-mobile-web-app-title" content="Woxy" />
 
+    <!-- 原有脚本和样式 -->
     <script src="./js/blockly.min.js"></script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/sweetalert.js"></script>
@@ -37,13 +33,19 @@
     <link href="./css/prism-okaidia.min.css" rel="stylesheet" />
     <script src="./js/screen.js"></script>
     <script src="./js/icon.js"></script>
-
     <script src="./js/main.js"></script>
     <script src="./js/f12.js"></script>
     <script src="./js/crypto.js"></script>
 
+    <!-- 新添加的样式 -->
     <link href="./css/editor.css" rel="stylesheet" />
     <link href="./css/main.css" rel="stylesheet" />
+
+    <!-- 工作区相关脚本 -->
+    <script src="./blocks/msg.js"></script>
+    <script src="./blocks/get.js"></script>
+    <script src="./blocks/get.js.js"></script>
+    <script src="./blocks/workspace.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -52,466 +54,318 @@
             }, 200);
         });
     </script>
-
 </head>
 
 <body>
     <div data-intro="欢迎来到 Woxy 编辑器！您可以加入我们的 QQ 群：135452025" data-title="欢迎！"></div>
 
-    <div id="box-parent">
-        <div id="theme-box">
-            <p style="font-size: 24px;margin-top:10px;margin-bottom: 20px; font-weight: 900;">主题皮肤切换</p>
-            <hr />
+    <!-- 主题选择对话框 -->
+    <div id="box-parent"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+        <div
+            style="background: white; padding: 24px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); max-width: 300px;">
+            <p style="font-size: 24px; margin: 0 0 20px 0; font-weight: 900;">主题皮肤切换</p>
+            <hr style="margin: 16px 0;">
 
-            <p id="theme-blue" style="margin-top: 20px;margin-bottom: 20px;">天蓝色 - &nbsp;&nbsp;&nbsp;<b
-                    style="background-color: #2196f3; border-radius: 2px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></p>
-            <p id="theme-purple" style="margin-top: 20px;margin-bottom: 20px;">深紫色 - &nbsp;&nbsp;&nbsp;<b
-                    style="background-color: #6d50f0; border-radius: 2px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></p>
-            <p id="theme-black" style="margin-top: 20px;margin-bottom: 20px;">深黑色 - &nbsp;&nbsp;&nbsp;<b
-                    style="background-color: #494949; border-radius: 2px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></p>
+            <div class="theme-selector" onclick="setTheme('#2196f3')">
+                天蓝色 - <span class="theme-blue"></span>
+            </div>
 
-            <hr />
-            <p>请选择颜色，点击后将自动切换并关闭此窗口</p>
+            <div class="theme-selector" onclick="setTheme('#6d50f0')">
+                深紫色 - <span class="theme-purple"></span>
+            </div>
+
+            <div class="theme-selector" onclick="setTheme('#494949')">
+                深黑色 - <span class="theme-black"></span>
+            </div>
+
+            <hr style="margin: 16px 0;">
+            <p style="font-size: 14px; color: #666;">请选择颜色，点击后将自动切换并关闭此窗口</p>
         </div>
     </div>
 
-    <s-dialog id="dialog1" style="z-index: 999; overflow: hidden;">
-        <div slot="headline">导入 / 导出</div>
-        <br />
-        <div>此功能用于积木数据操作，点击右下角的 按钮“关闭” 关闭对话框</div>
-        <br>
-        <div class="input-section">
-            <s-text-field label="积木数据" style="--border-radius: 12px; display: grid; margin-bottom: 12px; ">
-                <textarea id="data" type="text" class="datainput"
-                    style="min-height: 104px; width: 100%; max-height: 188px;"></textarea>
-            </s-text-field>
+    <!-- 导入/导出对话框 -->
+    <dialog id="dialog1" class="native-dialog">
+        <div class="dialog-header">导入 / 导出</div>
+        <div class="dialog-content">
+            <p>此功能用于积木数据操作，点击右下角的按钮"关闭"关闭对话框</p>
 
-            <s-button id="a" style="margin-right: 8px; background-color: #2196f3;">导入积木</s-button>
-            <label for="importFile">
-                <s-button type="outlined" style="color: #2196f3;"> 选择作品文件 </s-button>
-            </label>
+            <div class="form-group">
+                <label class="form-label">积木数据</label>
+                <textarea id="data" class="form-control" style="min-height: 104px; max-height: 188px;"
+                    placeholder="请输入积木数据"></textarea>
+            </div>
 
-            <input id="importFile" accept=".json" type="file" style="display: none;">
+            <div style="margin-bottom: 16px;">
+                <button class="btn btn-primary" id="a" style="margin-right: 8px;">导入积木</button>
+                <label for="importFile" class="btn btn-outlined">选择作品文件</label>
+                <input id="importFile" accept=".json" type="file" style="display: none;">
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="form-group">
+                <label class="form-label">积木数据</label>
+                <input id="json" class="form-control" disabled placeholder="请先导出积木">
+            </div>
+
+            <button class="btn btn-primary" id="b">导出积木</button>
         </div>
-        <s-divider style="margin-top: 12px; margin-bottom: 12px;"></s-divider>
-        <div class="input-section">
-            <p style="margin-bottom: 8px;">积木数据</p>
-            <s-text-field style="--border-radius: 12px; display: grid; margin-bottom: 12px;">
-                <input id="json" disabled placeholder="请先导出积木" type="text" style="padding-left: 18px;">
-            </s-text-field>
-            <s-button id="b" style=" background-color: #2196f3; font-size: 15px">导出积木</s-button>
+        <div class="dialog-actions">
+            <button class="btn btn-text" onclick="document.getElementById('dialog1').close()">关闭</button>
         </div>
-        <s-button slot="action" type="text" style="color: #2196f3;">
-            <s-icon type="close" slot="start" style="margin-right: 8px;"></s-icon>
-            关闭
-        </s-button>
-    </s-dialog>
+    </dialog>
 
+    <!-- 开始页面 -->
     <div id="start_page">
         <h1>Woxy</h1>
         <h3 id="text"></h3>
     </div>
 
+    <!-- 导航栏 -->
     <header class="navbar" data-intro="这是导航栏，可使用丰富的功能，建议自行探索" data-title="导航栏">
-        <s-page style="background: none; color: white;" theme="primary">
-
-            <ul>
+        <div style="background: none; color: white;">
+            <ul style="display: flex; align-items: center; margin: 0; padding: 0; list-style: none;">
                 <li>
                     <img src="./image/logo_new.png" width="30px" height="30px"
-                        style="margin-left: 2px;margin-right: 10px;" />
+                        style="margin-left: 2px; margin-right: 10px;">
                 </li>
-                <li><b style="margin-right: 10px;">Woxy</b><b style="margin-right: 35px;"> </b></li>
+                <li><b style="margin-right: 10px;">Woxy</b></li>
 
-                <s-popup-menu style="border: white; z-index: 9999; border-radius: 12px;">
-                    <s-button slot="trigger" type="text" style="color: white; border-radius: 12px;">代码</s-button>
-                    <s-popup-menu-item href="javascript:void(0)" id="code_open">
-                        <s-icon slot="start" style="color: black; margin-left: 16px; width: 18px; height: 18px;">
-                            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M305.4 21.8c-1.3-10.4-9.1-18.8-19.5-20C276.1 .6 266.1 0 256 0c-11.1 0-22.1 .7-32.8 2.1c-10.3 1.3-18 9.7-19.3 20l-2.9 23.1c-.8 6.4-5.4 11.6-11.5 13.7c-9.6 3.2-19 7.2-27.9 11.7c-5.8 3-12.8 2.5-18-1.5l-18-14c-8.2-6.4-19.7-6.8-27.9-.4c-16.6 13-31.5 28-44.4 44.7c-6.3 8.2-5.9 19.6 .5 27.8l14.2 18.3c4 5.1 4.4 12 1.5 17.8c-4.4 8.8-8.2 17.9-11.3 27.4c-2 6.2-7.3 10.8-13.7 11.6l-22.8 2.9c-10.3 1.3-18.7 9.1-20 19.4C.7 234.8 0 245.3 0 256c0 10.6 .6 21.1 1.9 31.4c1.3 10.3 9.7 18.1 20 19.4l22.8 2.9c6.4 .8 11.7 5.4 13.7 11.6c3.1 9.5 6.9 18.7 11.3 27.5c2.9 5.8 2.4 12.7-1.5 17.8L54 384.8c-6.4 8.2-6.8 19.6-.5 27.8c12.9 16.7 27.8 31.7 44.4 44.7c8.2 6.4 19.7 6 27.9-.4l18-14c5.1-4 12.2-4.4 18-1.5c9 4.6 18.3 8.5 27.9 11.7c6.1 2.1 10.7 7.3 11.5 13.7l2.9 23.1c1.3 10.3 9 18.7 19.3 20c10.7 1.4 21.7 2.1 32.8 2.1c10.1 0 20.1-.6 29.9-1.7c10.4-1.2 18.2-9.7 19.5-20l2.8-22.5c.8-6.5 5.5-11.8 11.7-13.8c10-3.2 19.7-7.2 29-11.8c5.8-2.9 12.7-2.4 17.8 1.5L385 457.9c8.2 6.4 19.6 6.8 27.8 .5c2.8-2.2 5.5-4.4 8.2-6.7L451.7 421c1.8-2.2 3.6-4.4 5.4-6.6c6.5-8.2 6-19.7-.4-27.9l-14-17.9c-4-5.1-4.4-12.2-1.5-18c4.8-9.4 9-19.3 12.3-29.5c2-6.2 7.3-10.8 13.7-11.6l22.8-2.8c10.3-1.3 18.8-9.1 20-19.4c.2-1.7 .4-3.5 .6-5.2V230.1c-.2-1.7-.4-3.5-.6-5.2c-1.3-10.3-9.7-18.1-20-19.4l-22.8-2.8c-6.4-.8-11.7-5.4-13.7-11.6c-3.4-10.2-7.5-20.1-12.3-29.5c-3-5.8-2.5-12.8 1.5-18l14-17.9c6.4-8.2 6.8-19.7 .4-27.9c-1.8-2.2-3.6-4.4-5.4-6.6L421 60.3c-2.7-2.3-5.4-4.5-8.2-6.7c-8.2-6.4-19.6-5.9-27.8 .5L366.7 68.3c-5.1 4-12.1 4.4-17.8 1.5c-9.3-4.6-19-8.6-29-11.8c-6.2-2-10.9-7.3-11.7-13.7l-2.8-22.5zM287.8 162.6l-32 192c-1.5 8.7-9.7 14.6-18.4 13.2s-14.6-9.7-13.2-18.4l32-192c1.5-8.7 9.7-14.6 18.4-13.2s14.6 9.7 13.2 18.4zM187.3 227.3L158.6 256l28.7 28.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-40-40c-6.2-6.2-6.2-16.4 0-22.6l40-40c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6zm160-22.6l40 40c6.2 6.2 6.2 16.4 0 22.6l-40 40c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6L353.4 256l-28.7-28.7c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0z" />
-                            </svg>
-                        </s-icon>
-                        生成代码
-                    </s-popup-menu-item>
-                    <s-popup-menu-item id="copycode" href="javascript:void(0)">
-                        <s-icon slot="start" style="color: black; margin-left: 16px; width: 18px; height: 18px;">
-                            <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+                <!-- 代码下拉菜单 -->
+                <li class="dropdown">
+                    <button class="dropdown-toggle" onclick="toggleDropdown(this)">代码</button>
+                    <div class="dropdown-menu">
+                        <a href="javascript:void(0)" class="dropdown-item" id="code_open">
+                           <svg class="icon" xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><title>生成代码</title><g id="code_line" fill='none'><path d='M0 0h24v24H0z'/><path fill='currentColor' d='M14.486 3.143a1 1 0 0 1 .692 1.233l-4.43 15.788a1 1 0 0 1-1.926-.54l4.43-15.788a1 1 0 0 1 1.234-.693M7.207 7.05a1 1 0 0 1 0 1.414L3.672 12l3.535 3.535a1 1 0 1 1-1.414 1.415L1.55 12.707a1 1 0 0 1 0-1.414L5.793 7.05a1 1 0 0 1 1.414 0m9.586 1.414a1 1 0 1 1 1.414-1.414l4.243 4.243a1 1 0 0 1 0 1.414l-4.243 4.243a1 1 0 0 1-1.414-1.415L20.328 12z'/></g></svg>
+                            生成代码
+                        </a>
+                        <a href="javascript:void(0)" class="dropdown-item" id="copycode">
+                            <svg class="icon" xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><title>复制代码</title><g id="copy_2_line" fill='none' fill-rule='evenodd'><path d='M24 0v24H0V0zM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01z'/><path fill='currentColor' d='M9 2a2 2 0 0 0-2 2v2h2V4h11v11h-2v2h2a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM4 7a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm0 2h11v11H4z'/></g></svg>
+                            复制代码
+                        </a>
+                        <a href="javascript:void(0)" class="dropdown-item"
+                            onclick="document.getElementById('dialog1').showModal()">
+                            <svg class="icon" style="transform: scale(1.15);" xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><title>导入或导出作品</title><g id="transfer_2_line" fill='none' fill-rule='nonzero'><path d='M24 0v24H0V0h24ZM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01-.184-.092Z'/><path fill='currentColor' d='M8.122 3.464c.665-.666 1.784-.24 1.872.662l.006.115V20a1 1 0 0 1-1.993.117L8 20V6.414L5.707 8.707a1 1 0 0 1-1.497-1.32l.083-.094 3.83-3.83ZM15 3a1 1 0 0 1 .993.883L16 4v13.586l2.293-2.293a1 1 0 0 1 1.497 1.32l-.083.094-3.83 3.83c-.664.665-1.783.239-1.871-.663L14 19.759V4a1 1 0 0 1 1-1Z'/></g></svg>
+                            导入导出
+                        </a>
+                        <a href="javascript:void(0)" class="dropdown-item"
+                            onclick="document.getElementById('dialog2').showModal(); loadworklist();">
+                            <svg class="icon" style="transform: scale(1.15) translateY(-1px) translateX(1px);" xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><title>作品模板</title><g id="layers_line" fill='none' fill-rule='evenodd'><path d='M24 0v24H0V0zM12.594 23.258l-.012.002-.071.035-.02.004-.014-.004-.071-.036c-.01-.003-.019 0-.024.006l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.016-.018m.264-.113-.014.002-.184.093-.01.01-.003.011.018.43.005.012.008.008.201.092c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.003-.011.018-.43-.003-.012-.01-.01z'/><path fill='currentColor' d='M12.01 2.378a2.5 2.5 0 0 1 2.985 2.29l.005.161v.551c1.503-.3 2.9.792 2.995 2.288l.005.161v.55c1.503-.3 2.9.793 2.995 2.289l.005.162v6.53a3 3 0 0 1-2.239 2.902l-.173.04-6.598 1.32a2.5 2.5 0 0 1-2.985-2.29L9 19.17v-.55l-.01.002a2.5 2.5 0 0 1-2.985-2.29L6 16.17v-.55l-.01.002a2.5 2.5 0 0 1-2.985-2.29L3 13.17V6.64a3 3 0 0 1 2.238-2.902l.174-.04zm6.392 7.961-6.598 1.32a1 1 0 0 0-.804.98v6.531a.5.5 0 0 0 .598.49l6.598-1.32a1 1 0 0 0 .804-.98v-6.53a.5.5 0 0 0-.598-.49m-3-3L8.804 8.66a1 1 0 0 0-.804.98v6.531a.5.5 0 0 0 .598.49L9 16.58v-3.94a3 3 0 0 1 2.412-2.942L16 8.78v-.95a.5.5 0 0 0-.598-.49m-3-3L5.804 5.66a1 1 0 0 0-.804.98v6.531a.5.5 0 0 0 .598.49L6 13.58V9.64a3 3 0 0 1 2.412-2.942L13 5.78v-.95a.5.5 0 0 0-.598-.49'/></g></svg>
+                            模板作品
+                        </a>
+                    </div>
+                </li>
 
-                                <path
-                                    d="M384 336H192c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16l140.1 0L400 115.9V320c0 8.8-7.2 16-16 16zM192 384H384c35.3 0 64-28.7 64-64V115.9c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1H192c-35.3 0-64 28.7-64 64V320c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H256c35.3 0 64-28.7 64-64V416H272v32c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192c0-8.8 7.2-16 16-16H96V128H64z" />
-                            </svg>
-                        </s-icon>
-                        复制代码
-                    </s-popup-menu-item>
-                    <s-popup-menu-item onclick="document.querySelector('#dialog1').show()">
-                        <s-icon slot="start" style="color: black; margin-left: 16px; width: 18px; height: 18px;">
-                            <svg t="1755758621920" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                xmlns="http://www.w3.org/2000/svg" p-id="5138" width="64" height="64">
-                                <path
-                                    d="M773.82 338.84L625.06 194.28v144.56z m-220.1 69.33V165.51H268.47q-15 0-25.34 10.06a33 33 0 0 0-10.31 24.61v624a32.84 32.84 0 0 0 10.31 24.61q10.29 10.05 25.34 10.05h499.2q15.08 0 25.37-10.05a33 33 0 0 0 10.27-24.61v-416z m-285.23-312h356.57l249.58 242.67v485.33c0 28.65-10.45 53.27-31.33 73.49s-46.09 30.5-75.65 30.5H268.47q-44.25 0-75.62-30.5c-20.9-20.22-31.34-44.84-31.34-73.49v-624q0-43 31.34-73.49t75.62-30.51z m0 0"
-                                    fill="#2c2c2c" p-id="5139"></path>
-                            </svg>
-                        </s-icon>
-                        导入导出
-                    </s-popup-menu-item>
-                    <s-popup-menu-item onclick="document.querySelector('#dialog2').show();loadworklist();">
-                        <s-icon slot="start" style="color: black; margin-left: 16px; width: 19px; height: 19px;">
-                            <svg t="1725009924949" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                xmlns="http://www.w3.org/2000/svg" p-id="5643" width="512" height="512">
-                                <path
-                                    d="M751.206195 84.74624c58.85952 43.68384 95.8464 91.5456 123.82208 151.81824A391.41376 391.41376 0 0 1 911.359795 401.69472c0 134.5536-68.34176 257.6384-179.46624 330.40384-7.49568 4.9152-12.9024 11.8784-23.4496 30.0032-3.46112 6.00064-5.36576 9.27744-7.3728 12.5952-37.2736 62.34112-86.85568 91.40224-189.07136 91.40224-101.31456 0-150.50752-28.52864-185.28256-89.25184a518.7584 518.7584 0 0 1-3.7888-6.7584l-3.44064-6.2464c-9.50272-17.2032-14.21312-23.40864-20.8896-27.58656C183.787315 664.20736 112.639795 538.97216 112.639795 401.69472 112.639795 183.02976 291.532595 5.9392 511.999795 5.9392c87.40864 0 170.65984 27.9552 239.2064 78.80704zM702.340915 150.528A318.19776 318.19776 0 0 0 511.999795 87.8592C336.588595 87.8592 194.559795 228.4544 194.559795 401.69472c0 108.7488 56.34048 207.91296 147.57888 265.17504 21.77024 13.66016 33.25952 28.7744 49.0496 57.36448l3.39968 6.16448c1.2288 2.2528 2.2528 4.03456 3.21536 5.7344 20.19328 35.2256 42.25024 48.04608 114.19648 48.04608 72.94976 0 96.0512-13.55776 118.784-51.52768 1.69984-2.82624 3.29728-5.61152 6.84032-11.71456 16.56832-28.48768 28.20096-43.49952 49.39776-57.38496C775.331635 605.73696 829.439795 508.27264 829.439795 401.69472c0-45.75232-9.87136-90.05056-28.73344-130.6624-22.46656-48.4352-51.05664-85.4016-98.34496-120.50432zM299.622195 979.456a40.96 40.96 0 1 1 31.27296-75.71456C392.990515 929.3824 453.283635 942.08 511.999795 942.08c58.38848 0 115.6096-12.55424 171.99104-37.84704a40.96 40.96 0 1 1 33.52576 74.752C650.731315 1008.90624 582.102835 1024 511.999795 1024c-69.79584 0-140.65664-14.92992-212.3776-44.544z m76.84096-751.84128a40.96 40.96 0 1 1 48.3328 66.1504c-16.87552 12.32896-31.232 31.49824-42.82368 58.30656-11.3664 26.29632-15.11424 54.55872-11.1616 85.56544a40.96 40.96 0 1 1-81.26464 10.38336c-5.79584-45.3632-0.08192-88.45312 17.22368-128.47104 17.1008-39.50592 40.2432-70.41024 69.69344-91.9552z"
-                                    fill="#000000" p-id="5644"></path>
-                            </svg>
-                        </s-icon>
-                        模板作品
-                    </s-popup-menu-item>
-                </s-popup-menu>
+                <!-- 主题下拉菜单 -->
+                <li class="dropdown">
+                    <button class="dropdown-toggle" onclick="toggleDropdown(this)">主题</button>
+                    <div class="dropdown-menu">
+                        <a href="javascript:void(0)" class="dropdown-item"
+                            onclick='$("#box-parent").css("display","flex");'>
+                            <svg style="transform: scale(1.1) translateX(1px);" class="icon" xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><title>主题设置</title><g id="palette_line" fill='none'><path d='M24 0v24H0V0zM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01z'/><path fill='currentColor' d='M12 2c5.523 0 10 4.477 10 10 0 .649-.062 1.284-.18 1.9-.386 2.004-2.397 2.85-4.082 2.57l-1.74-.29a1.29 1.29 0 0 0-1.124.36c-.37.37-.547.879-.298 1.376.423.846.429 1.812.055 2.603C14.131 21.58 13.11 22 12 22 6.477 22 2 17.523 2 12S6.477 2 12 2m0 2a8 8 0 1 0 0 16l.195-.002c.258-.01.5-.06.628-.332a.993.993 0 0 0-.036-.855c-.63-1.262-.302-2.71.673-3.685a3.29 3.29 0 0 1 2.867-.919l1.74.29c.957.16 1.668-.348 1.789-.975A8 8 0 0 0 12 4m-4.5 7a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3m7-4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3m-5 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3'/></g></svg>
+                            
+                            主题设置
+                        </a>
+                        <a href="javascript:void(0)" class="dropdown-item" onclick="moon()">
+                           <svg style="transform: scale(1.2) translateY(-1px) translateX(1px);" class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                             <title>深色模式切换</title><g id="moon_line" fill='none' fill-rule='evenodd'><path d='M24 0v24H0V0zM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01z'/><path fill='currentColor' d='M13.574 3.137a1.01 1.01 0 0 0-1.097 1.409 6 6 0 0 1-7.931 7.931 1.01 1.01 0 0 0-1.409 1.097A9 9 0 0 0 21 12c0-4.434-3.206-8.118-7.426-8.863m1.307 2.481A7.002 7.002 0 0 1 12 19a7.002 7.002 0 0 1-6.382-4.12 8 8 0 0 0 9.263-9.263Z'/></g></svg>                            深色模式
+                        </a>
+                    </div>
+                </li>
 
-                <s-popup-menu style="border: white; z-index: 999; border-radius: 12px;">
-                    <s-button slot="trigger" type="text" style="color: white; border-radius: 12px;">主题</s-button>
-                    <s-popup-menu-item href="javascript:void(0)" onclick='$("#box-parent").css("display","flex");'>
-                        <s-icon slot="start" style="color: black; margin-left: 16px; width: 18px; height: 18px;">
-                            <?xml version="1.0" encoding="UTF-8"?><svg width="48" height="48" viewBox="0 0 48 48"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M18 6C18 9.31371 20.6863 12 24 12C27.3137 12 30 9.31371 30 6H35.4545L42 15.8182L36.2727 20.7273V42H11.7273V20.7273L6 15.8182L12.5455 6H18Z"
-                                    fill="#000000" stroke="#000000" stroke-width="4" stroke-linejoin="round" />
-                            </svg>
-                        </s-icon>
-                        主题设置
-                    </s-popup-menu-item>
-                    <s-popup-menu-item href="javascript:void(0)" onclick='moon();'>
-                        <s-icon slot="start" style="color: black; margin-left: 16px; width: 18px; height: 18px;">
-                            <?xml version="1.0" encoding="UTF-8"?><svg width="48" height="48" viewBox="0 0 48 48"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M28.0527 4.41085C22.5828 5.83695 18.5455 10.8106 18.5455 16.7273C18.5455 23.7564 24.2436 29.4545 31.2727 29.4545C37.1894 29.4545 42.1631 25.4172 43.5891 19.9473C43.8585 21.256 44 22.6115 44 24C44 35.0457 35.0457 44 24 44C12.9543 44 4 35.0457 4 24C4 12.9543 12.9543 4 24 4C25.3885 4 26.744 4.14149 28.0527 4.41085Z"
-                                    fill="#000000" stroke="#000000" stroke-width="4" stroke-linejoin="round" />
-                            </svg>
-                        </s-icon>
-                        深色模式
-                    </s-popup-menu-item>
-                </s-popup-menu>
-
-                <script>
-                    function moon() {
-                        if ($.cookie("theme") != "#494949") {
-                            $.cookie("theme", "#494949");
-                            $(".navbar").css("background-color", "#494949");
-                            document.querySelector('#blocklyDiv .blocklyMainBackground').style.fill = '#1f1f1f';
-                            var toolboxDiv = document.querySelector('#blocklyDiv .blocklyToolboxDiv');
-                            toolboxDiv.style.backgroundColor = '#c2c2c2';
-                            toolboxDiv.style.borderRight = '1px solid #e5e7eb';
-                        } else {
-                            $(".navbar").css("background-color", "#2196f3");
-                            $.cookie("theme", "#2196f3");
-                            document.querySelector('#blocklyDiv .blocklyMainBackground').style.fill = '#f2f3f7';
-                            var toolboxDiv = document.querySelector('#blocklyDiv .blocklyToolboxDiv');
-                            toolboxDiv.style.backgroundColor = '#fff';
-                            toolboxDiv.style.borderRight = '1px solid #e5e7eb';
-                        }
-                    }
-                </script>
-
-                <s-popup-menu style="border: white; z-index: 999; border-radius: 12px;">
-                    <s-button slot="trigger" type="text" style="color: white; border-radius: 12px;">其他</s-button>
-                    <s-popup-menu-item id="take-photo">
-                        <s-icon slot="start" style="color: black; margin-left: 16px; width: 18px; height: 18px;">
-                            <svg t="1755759285900" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                xmlns="http://www.w3.org/2000/svg" p-id="9222" width="64" height="64">
-                                <path
-                                    d="M640 576c0 70.4-57.6 128-128 128s-128-57.6-128-128 57.6-128 128-128 128 57.6 128 128z m320-224v480c0 35.2-28.8 64-64 64H128c-35.2 0-64-28.8-64-64V352c0-35.2 28.8-64 64-64h167.2L376 192h256l80.8 96H896c35.2 0 64 28.8 64 64zM704 576c0-106.4-85.6-192-192-192S320 469.6 320 576s85.6 192 192 192 192-85.6 192-192z"
-                                    p-id="9223"></path>
-                            </svg>
-                        </s-icon>
-                        拍照保存
-                    </s-popup-menu-item>
-                    <s-popup-menu-item href="javascript:void(0)" onclick="intro()">
-                        <s-icon slot="start" style="color: black; margin-left: 16px; width: 18px; height: 18px;">
-                            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
-                            </svg>
-                        </s-icon>
-                        新手指引
-                    </s-popup-menu-item>
-                    <s-popup-menu-item href="index.html">
-                        <s-icon slot="start" style="color: black; margin-left: 16px; width: 18px; height: 18px;">
-                            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M352 256c0 22.2-1.2 43.6-3.3 64H281.8l12.6-42.8c10.7-36.4-23.1-70.3-59.6-59.6l-74.6 21.9c.4-16.3 1.5-32.2 3.1-47.5H348.7c2.2 20.4 3.3 41.8 3.3 64zM20.4 280.6c-7.1 2.1-13.1 5.5-18.1 9.9C.8 279.2 0 267.7 0 256c0-22.1 2.8-43.5 8.1-64H131.2c-1.9 18.4-2.9 37.4-3.1 57L20.4 280.6zM231.4 491.6L272.4 352h71.9c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512c-7.2 0-16.3-3.1-27.3-13.4c1-2.2 1.9-4.6 2.7-7.1zM380.8 192H503.9c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-325.7 0c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7H167.7zm-32.4 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM493.4 352c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6H493.4zM39 308.5l204.8-60.2c12.1-3.6 23.4 7.7 19.9 19.9L203.5 473c-4.1 13.9-23.2 15.6-29.7 2.6l-28.7-57.3c-.7-1.3-1.5-2.6-2.5-3.7l-88 88c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l88-88c-1.1-1-2.3-1.9-3.7-2.5L36.4 338.2c-13-6.5-11.3-25.6 2.6-29.7z" />
-                            </svg>
-                        </s-icon>
-                        <a href="index.html" style="color: black; text-decoration:none;">
+                <!-- 其他下拉菜单 -->
+                <li class="dropdown">
+                    <button class="dropdown-toggle" onclick="toggleDropdown(this)">其他</button>
+                    <div class="dropdown-menu">
+                        
+                        <a href="javascript:void(0)" class="dropdown-item" id="take-photo">
+                           <svg  style="transform: scale(1.1);" xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><title>拍照保存</title><g id="camera_2_ai_line" fill='none' fill-rule='evenodd'><path d='M24 0v24H0V0zM12.594 23.258l-.012.002-.071.035-.02.004-.014-.004-.071-.036c-.01-.003-.019 0-.024.006l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.016-.018m.264-.113-.014.002-.184.093-.01.01-.003.011.018.43.005.012.008.008.201.092c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.003-.011.018-.43-.003-.012-.01-.01z'/><path fill='currentColor' d='M20 2a1 1 0 0 1 .946.677l.13.378a3 3 0 0 0 1.869 1.87l.378.129a1 1 0 0 1 0 1.892l-.378.13a3 3 0 0 0-1.87 1.869l-.129.378a1 1 0 0 1-1.892 0l-.13-.378a3 3 0 0 0-1.869-1.87l-.378-.129a1 1 0 0 1 0-1.892l.378-.13a3 3 0 0 0 1.87-1.869l.129-.378A1 1 0 0 1 20 2m0 3.196a5.006 5.006 0 0 1-.804.804c.298.236.567.506.804.804.236-.298.506-.568.804-.804A5.006 5.006 0 0 1 20 5.196M8 3.586A2 2 0 0 1 9.414 3H14a1 1 0 1 1 0 2H9.414L8 6.414A2 2 0 0 1 6.586 7H4v12h16v-6a1 1 0 1 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2.586zM9 12.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-5a5 5 0 1 0 0 10 5 5 0 0 0 0-10'/></g></svg>
+                            拍照保存
+                        </a>
+                        <a href="javascript:void(0)" class="dropdown-item" onclick="intro()">
+                            <svg style="transform: scale(1.2) translateY(-1px);"  xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><title>flag_1_line</title><g id="flag_1_line" fill='none' fill-rule='evenodd'><path d='M24 0v24H0V0zM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01z'/><path fill='currentColor' d='M6 3a2 2 0 0 0-2 2v16a1 1 0 1 0 2 0v-5h13.804a1.1 1.1 0 0 0 .89-1.747L17.236 9.5l3.456-4.753A1.1 1.1 0 0 0 19.803 3zm0 11V5h12.036l-2.63 3.618a1.5 1.5 0 0 0 0 1.764L18.035 14z'/></g></svg>
+                            新手指引
+                        </a>
+                        <a href="index.html" class="dropdown-item">
+                            <svg style="transform: scale(1.1);"  xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><title>官方网站</title><g id="earth_2_line" fill='none' fill-rule='evenodd'><path d='M24 0v24H0V0zM12.594 23.258l-.012.002-.071.035-.02.004-.014-.004-.071-.036c-.01-.003-.019 0-.024.006l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.016-.018m.264-.113-.014.002-.184.093-.01.01-.003.011.018.43.005.012.008.008.201.092c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.003-.011.018-.43-.003-.012-.01-.01z'/><path fill='currentColor' d='M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2m1.482 14.94a18.214 18.214 0 0 1-2.964 0c.093.397.197.765.31 1.102.251.755.53 1.293.79 1.622.127.162.23.248.3.29l.051.028.03.008.032-.008.051-.027a1.21 1.21 0 0 0 .3-.29c.26-.33.539-.868.79-1.623.113-.337.217-.705.31-1.102m-8.675-1.435a8.026 8.026 0 0 0 4.441 4.01 10.52 10.52 0 0 1-.318-.84 15.818 15.818 0 0 1-.52-2.033 17.87 17.87 0 0 1-3.603-1.137m14.387 0c-1.145.5-2.351.883-3.605 1.137a15.63 15.63 0 0 1-.52 2.034c-.096.29-.202.572-.318.838a8.027 8.027 0 0 0 4.443-4.01Zm-5.218-4.634a15.119 15.119 0 0 1-3.952 0 26.02 26.02 0 0 0 .141 4.025 16.195 16.195 0 0 0 3.67 0A25.04 25.04 0 0 0 14 12c0-.384-.008-.76-.024-1.13ZM4.568 9.032a7.978 7.978 0 0 0-.52 3.856 15.893 15.893 0 0 0 4.067 1.637 27.889 27.889 0 0 1-.074-4.053 14.915 14.915 0 0 1-3.473-1.44m14.864 0a14.916 14.916 0 0 1-3.473 1.44 27.879 27.879 0 0 1-.074 4.053 15.892 15.892 0 0 0 4.066-1.637 7.978 7.978 0 0 0-.52-3.855Zm-7.416-5.02-.011-.002-.02.003-.038.015a1.233 1.233 0 0 0-.33.307c-.26.33-.538.868-.79 1.622-.27.808-.488 1.8-.633 2.919a13.123 13.123 0 0 0 3.612 0c-.145-1.12-.364-2.111-.633-2.919-.252-.754-.53-1.293-.79-1.622a1.233 1.233 0 0 0-.3-.29l-.067-.032Zm-2.768.474a8.022 8.022 0 0 0-3.71 2.797c.843.484 1.746.876 2.695 1.163.16-1.164.397-2.223.697-3.122.097-.291.203-.572.318-.838m5.504 0c.115.266.22.547.318.838.3.9.537 1.958.697 3.122a12.927 12.927 0 0 0 2.695-1.163 8.021 8.021 0 0 0-3.71-2.797'/></g></svg>
                             官方网站
                         </a>
-                    </s-popup-menu-item>
-                    <s-popup-menu group="start">
-                        <s-popup-menu-item slot="trigger">
-                            发电
-                            <s-icon slot="end" type="arrow_drop_right"></s-icon>
-                        </s-popup-menu-item>
-                        <s-popup-menu-item onclick='game_start();'>
-                            <s-icon slot="start" style="color: black; margin-left: 16px; width: 18px; height: 18px;">
-                                <?xml version="1.0" encoding="UTF-8"?><svg width="48" height="48" viewBox="0 0 48 48"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M24.0039 27C25.6608 27 27.0039 25.6569 27.0039 24C27.0039 22.3431 25.6608 21 24.0039 21C22.3471 21 21.0039 22.3431 21.0039 24C21.0039 25.6569 22.3471 27 24.0039 27Z"
-                                        fill="#ffffff" />
-                                    <path
-                                        d="M19.0405 31.476C20.4626 32.4194 22.1673 32.9688 24 32.9688C25.8327 32.9688 27.5374 32.4194 28.9595 31.476L35.021 40.6827C31.861 42.7792 28.0727 44 24 44C19.9273 44 16.139 42.7792 12.979 40.6827L19.0405 31.476ZM15.0159 24.484L4.03531 25.145C4.01188 24.7474 4 24.3467 4 23.9432C4 16.0911 8.49944 9.29287 15.0538 6L19.9742 15.8688C17.0247 17.3506 15 20.4098 15 23.9432C15 24.1248 15.0053 24.3051 15.0159 24.484ZM28.0258 15.8688L32.9462 6C39.5006 9.29287 44 16.0911 44 23.9432C44 24.3467 43.9881 24.7474 43.9647 25.145L32.9841 24.484C32.9947 24.3051 33 24.1248 33 23.9432C33 20.4098 30.9753 17.3506 28.0258 15.8688Z"
-                                        fill="#000000" stroke="#000000" stroke-width="4" stroke-linejoin="round" />
-                                </svg>
-                            </s-icon>
-                            千万别点！！！
-                        </s-popup-menu-item>
-                    </s-popup-menu>
-                </s-popup-menu>
+                    </div>
+                </li>
 
-                <s-popup-menu style="border: white; z-index: 999; border-radius: 12px;">
-                    <s-button slot="trigger" type="text" style="color: white; border-radius: 12px;">打包</s-button>
-                    <s-popup-menu-item href="javascript:void(0)" onclick='$("#g-apk").css("display","flex");'>
-                        <s-icon slot="start" style="color: black; margin-left: 16px; width: 18px; height: 18px;">
-                            <?xml version="1.0" encoding="UTF-8"?><svg width="48" height="48" viewBox="0 0 48 48"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M41.4004 11.551L36.3332 5H11.6666L6.58398 11.551" stroke="#000000"
-                                    stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-                                <path
-                                    d="M6 13C6 11.8954 6.89543 11 8 11H40C41.1046 11 42 11.8954 42 13V40C42 41.6569 40.6569 43 39 43H9C7.34315 43 6 41.6569 6 40V13Z"
-                                    fill="none" stroke="#000000" stroke-width="4" stroke-linejoin="round" />
-                                <path d="M32 27L24 35L16 27" stroke="#000000" stroke-width="4" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M23.9917 19V35" stroke="#000000" stroke-width="4" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </s-icon>
-                        安卓打包
-                    </s-popup-menu-item>
-                </s-popup-menu>
+                <!-- 打包下拉菜单 -->
+                <li class="dropdown">
+                    <button class="dropdown-toggle" onclick="toggleDropdown(this)">打包</button>
+                    <div class="dropdown-menu">
+                        <a href="javascript:void(0)" class="dropdown-item" onclick='$("#g-apk").css("display","flex");'>
+                         <svg style="transform: scale(1.2);" xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><title>安卓打包</title><g id="package_2_line" fill='none' fill-rule='evenodd'><path d='M24 0v24H0V0zM12.594 23.258l-.012.002-.071.035-.02.004-.014-.004-.071-.036c-.01-.003-.019 0-.024.006l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.016-.018m.264-.113-.014.002-.184.093-.01.01-.003.011.018.43.005.012.008.008.201.092c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.003-.011.018-.43-.003-.012-.01-.01z'/><path fill='currentColor' d='M12.25 4.299a.5.5 0 0 0-.5 0L6.206 7.5l1.813 1.047 5.798-3.343zm3.568 2.06L10.02 9.702l1.73.999a.5.5 0 0 0 .5 0L17.794 7.5l-1.976-1.14Zm2.976 2.873-5.544 3.201a2.25 2.25 0 0 1-.25.126v6.709l5.544-3.201a.5.5 0 0 0 .25-.433zM11 19.268v-6.709a2.5 2.5 0 0 1-.25-.126L5.206 9.232v6.402a.5.5 0 0 0 .25.433zm-.25-16.701a2.5 2.5 0 0 1 2.5 0l6.294 3.634a2.5 2.5 0 0 1 1.25 2.165v7.268a2.5 2.5 0 0 1-1.25 2.165l-6.294 3.634a2.5 2.5 0 0 1-2.5 0l-6.294-3.634a2.5 2.5 0 0 1-1.25-2.165V8.366a2.5 2.5 0 0 1 1.25-2.165z'/></g></svg>
+                            安卓打包
+                        </a>
+                    </div>
+                </li>
 
-                <s-popup-menu style="border: white; z-index: 999; border-radius: 12px;" id="cloud1">
-                    <s-button slot="trigger" type="text" style="color: white; border-radius: 12px;">云作品</s-button>
-                    <s-popup-menu-item href="javascript:void(0)" onclick='upd();'>
-                        <s-icon slot="start" style="color: black; margin-left: 16px; width: 18px; height: 18px;">
-                            <?xml version="1.0" encoding="UTF-8"?><svg width="48" height="48" viewBox="0 0 48 48"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M6 9C6 7.34315 7.34315 6 9 6H34.2814L42 13.2065V39C42 40.6569 40.6569 42 39 42H9C7.34315 42 6 40.6569 6 39V9Z"
-                                    fill="none" stroke="#000000" stroke-width="4" stroke-linejoin="round" />
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M24.0083 6L24 13.3846C24 13.7245 23.5523 14 23 14H15C14.4477 14 14 13.7245 14 13.3846L14 6"
-                                    fill="none" />
-                                <path
-                                    d="M24.0083 6L24 13.3846C24 13.7245 23.5523 14 23 14H15C14.4477 14 14 13.7245 14 13.3846L14 6H24.0083Z"
-                                    stroke="#000000" stroke-width="4" stroke-linejoin="round" />
-                                <path d="M9 6H34.2814" stroke="#000000" stroke-width="4" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M14 26H34" stroke="#000000" stroke-width="4" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M14 34H24.0083" stroke="#000000" stroke-width="4" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </s-icon>
-                        保存作品
-                    </s-popup-menu-item>
-                    <s-popup-menu-item href="javascript:void(0)"
-                        onclick="document.querySelector('#dialog').show();loadworklist();">
-                        <s-icon slot="start" style="color: black; margin-left: 16px; width: 18px; height: 18px;">
-                            <svg t="1724751532416" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                xmlns="http://www.w3.org/2000/svg" p-id="6582" width="512" height="512">
-                                <path
-                                    d="M542.5152 933.9392a44.6464 44.6464 0 1 1 44.6976-44.5952 44.6976 44.6976 0 0 1-44.6976 44.5952z"
-                                    p-id="6583" fill="#000000"></path>
-                                <path
-                                    d="M668.2112 934.5536v-1.4848a44.6464 44.6464 0 0 1 10.7008-87.9616h87.04a48.5376 48.5376 0 0 0 48.64-25.2928l3.0208-5.5296h1.3312c0.7168-1.3824 2.9696-7.168 2.9696-7.168l75.8784-292.9664a59.8016 59.8016 0 0 0 2.7648-17.4592 55.3984 55.3984 0 0 0-55.3984-55.3472h-552.96a55.5008 55.5008 0 0 0-53.9136 42.5984l-1.0752 4.5056h-0.3072l-74.2912 286.72a56.9344 56.9344 0 0 0-1.6896 13.824 55.3472 55.3472 0 0 0 55.3472 55.3472h186.9824a45.3632 45.3632 0 0 1 47.7184 44.544 44.6464 44.6464 0 0 1-34.048 43.3152v1.28l-10.6496 0.4096H184.5248a142.848 142.848 0 0 1-142.6432-142.6944V231.9872a142.848 142.848 0 0 1 142.6432-142.6944h220.8768l0.3072 0.3072a40.96 40.96 0 0 1 32.8192 21.6576l81.2032 109.0048h225.8944a1073.664 1073.664 0 0 1 240.64 275.0976 145.1008 145.1008 0 0 1-5.12 37.632l-70.5536 296.96-2.1504 2.1504a138.6496 138.6496 0 0 1-131.0208 101.2736l-4.3008 0.4608z m-483.1232-757.76a55.3472 55.3472 0 0 0-55.3472 55.3472v311.2448l18.9952-80.128 0.4096-0.3072A143.36 143.36 0 0 1 288.256 352.3072h511.4368a55.552 55.552 0 0 0-54.272-44.3904h-246.784a45.056 45.056 0 0 1-40.96-21.5552L376.2176 176.8448z"
-                                    p-id="6584" fill="#000000"></path>
-                            </svg>
-                        </s-icon>
-                        我的作品
-                    </s-popup-menu-item>
-                </s-popup-menu>
+                <!-- 云作品下拉菜单 -->
+                <li class="dropdown">
+                    <button class="dropdown-toggle" onclick="toggleDropdown(this)">云作品</button>
+                    <div class="dropdown-menu">
+                        <a href="javascript:void(0)" class="dropdown-item" onclick="upd();">
+                            <svg style="transform: scale(1.1);"  xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><title>保存作品</title><g id="save_2_line" fill='none' fill-rule='evenodd'><path d='M24 0v24H0V0zM12.594 23.258l-.012.002-.071.035-.02.004-.014-.004-.071-.036c-.01-.003-.019 0-.024.006l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.016-.018m.264-.113-.014.002-.184.093-.01.01-.003.011.018.43.005.012.008.008.201.092c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.003-.011.018-.43-.003-.012-.01-.01z'/><path fill='currentColor' d='M15.586 3A2 2 0 0 1 17 3.586L19.414 6A2 2 0 0 1 20 7.414V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM8 5H5v14h2v-5a2 2 0 0 1 2-2h5a2 2 0 0 1 2 2v5h2V7.414L15.586 5H15v2.5A1.5 1.5 0 0 1 13.5 9h-4A1.5 1.5 0 0 1 8 7.5zm6 9H9v5h5zm-1-9h-3v2h3z'/></g></svg>
+                            保存作品
+                        </a>
+                        <a href="javascript:void(0)" class="dropdown-item"
+                            onclick="document.getElementById('dialog').showModal(); loadworklist();">
+                            <svg style="transform: scale(1.15) translateY(-1px);"   xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><title>user_4_line</title><g id="user_4_line" fill='none' fill-rule='evenodd'><path d='M24 0v24H0V0zM12.594 23.258l-.012.002-.071.035-.02.004-.014-.004-.071-.036c-.01-.003-.019 0-.024.006l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.016-.018m.264-.113-.014.002-.184.093-.01.01-.003.011.018.43.005.012.008.008.201.092c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.003-.011.018-.43-.003-.012-.01-.01z'/><path fill='currentColor' d='M12 2c5.523 0 10 4.477 10 10a9.959 9.959 0 0 1-2.258 6.33l.02.022-.132.112A9.978 9.978 0 0 1 12 22c-2.95 0-5.6-1.277-7.43-3.307l-.2-.23-.132-.11.02-.024A9.958 9.958 0 0 1 2 12C2 6.477 6.477 2 12 2m0 15c-1.86 0-3.541.592-4.793 1.406A7.965 7.965 0 0 0 12 20a7.965 7.965 0 0 0 4.793-1.594A8.897 8.897 0 0 0 12 17m0-13a8 8 0 0 0-6.258 12.984C7.363 15.821 9.575 15 12 15s4.637.821 6.258 1.984A8 8 0 0 0 12 4m0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8m0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4'/></g></svg>
+                            我的作品
+                        </a>
+                    </div>
+                </li>
 
-                <li style="position: absolute;right: 1%;">
-                    <a href="/user_system/" style="text-decoration: none;">
-                        <svg t="1755783820240" class="icon" viewBox="0 0 1028 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2352" width="64" height="64"><path d="M815.814506 299.350645c0 165.306834-134.011812 299.350645-299.350645 299.350645s-299.350645-134.011812-299.350645-299.350645c0-165.306834 134.011812-299.350645 299.350645-299.350645s299.350645 134.011812 299.350645 299.350645z" fill="#ffffff" p-id="2353"></path><path d="M763.52814 612.780851c-69.75782 55.070279-156.219118 85.661323-247.064279 85.661323-91.901128 0-179.1944-31.295022-249.27221-87.421268-184.698228 67.805881-267.19165 304.758476-267.19165 412.979094l1027.711884 0c0-107.260648-83.133402-342.549295-264.183744-411.18715z" fill="#ffffff" p-id="2354"></path></svg>
-                        <p style="display: inline-block;margin-left: 10px;color: white;font-size: 16px;" id="username">未登录</p>
+                <li style="position: absolute; right: 1%;">
+                    <a href="/user_system/" style="text-decoration: none; display: flex; align-items: center;">
+                        <svg viewBox="0 0 1028 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M815.814506 299.350645c0 165.306834-134.011812 299.350645-299.350645 299.350645s-299.350645-134.011812-299.350645-299.350645c0-165.306834 134.011812-299.350645 299.350645-299.350645s299.350645 134.011812 299.350645 299.350645z"
+                                fill="#ffffff" />
+                            <path
+                                d="M763.52814 612.780851c-69.75782 55.070279-156.219118 85.661323-247.064279 85.661323-91.901128 0-179.1944-31.295022-249.27221-87.421268-184.698228 67.805881-267.19165 304.758476-267.19165 412.979094l1027.711884 0c0-107.260648-83.133402-342.549295-264.183744-411.18715z"
+                                fill="#ffffff" />
+                        </svg>
+                        <p style="display: inline-block; margin-left: 10px; color: white; font-size: 16px;"
+                            id="username">未登录</p>
                     </a>
                 </li>
 
-                <s-dialog id="dialog2"
-                    style="padding: 16px; z-index: 9999; overflow: hidden; display: flex; flex-direction: row; align-items: start;">
-                    <h3
-                        style="margin-left: 2px; text-align: start; margin-bottom: 8px; width: auto; align-items: start;">
-                        作品展示
-                    </h3>
-                    <div style="
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                ">
-                        <s-divider></s-divider>
-
-                        <div
-                            style="width: 100%; height: 64vh; display: grid;grid-row-gap: 24px;margin-left: 8px;grid-column-gap: 24px;grid-template-columns: repeat(3, calc(33.33% - 16px));overflow: auto;margin-bottom: 8px;">
-                            <a href='javascript:loadexample(1)' style="margin-top: 10%;">
-                                <s-card clickable="true" type="outlined"
-                                    style="text-align: start; max-width: 240px; height: 205px; margin-bottom: 16px;">
-                                    <div slot="image">
-                                        <img src="/image/work_cover.webp" alt="" width="238px" height="128px">
-                                    </div>
-                                    <div style="padding: 16px;">
-                                        <div slot="headline"
-                                            style="font-size: 20px; font-weight: 900; margin-bottom: 2px;">
-                                            你好世界
-                                        </div>
-
-                                        <div slot="subhead">开启网页创作之旅</div>
-                                    </div>
-                                </s-card>
-                            </a>
-
-                            <a href='javascript:loadexample(2)' style="margin-top: 10%;">
-                                <s-card clickable="true" type="outlined"
-                                    style="text-align: start; max-width: 240px; height: 205px; margin-bottom: 16px;">
-                                    <div slot="image">
-                                        <img src="/image/work_cover.webp" alt="" width="238px" height="128px">
-                                    </div>
-                                    <div style="padding: 16px;">
-                                        <div slot="headline"
-                                            style="font-size: 20px; font-weight: 900; margin-bottom: 2px;">
-                                            计算器
-                                        </div>
-                                        <div slot="subhead">计算加减乘除乘方</div>
-                                    </div>
-                                </s-card>
-                            </a>
-
-                            <a href='javascript:loadexample(3)' style="margin-top: 10%;">
-                                <s-card clickable="true" type="outlined"
-                                    style="text-align: start; max-width: 240px; height: 205px; margin-bottom: 16px;">
-                                    <div slot="image">
-                                        <img src="/image/work_cover.webp" alt="" width="238px" height="128px">
-                                    </div>
-                                    <div style="padding: 16px;">
-                                        <div slot="headline"
-                                            style="font-size: 20px; font-weight: 900; margin-bottom: 2px;">
-                                            工具导航
-                                        </div>
-                                        <div slot="subhead">实用的常用网页导航站</div>
-                                    </div>
-                                </s-card>
-                            </a>
-
-                            <a href='javascript:loadexample(4)' style="margin-top: 10%;">
-                                <s-card clickable="true" type="outlined"
-                                    style="text-align: start; max-width: 240px; height: 205px; margin-bottom: 16px;">
-                                    <div slot="image">
-                                        <img src="/image/work_cover.webp" alt="" width="238px" height="128px">
-                                    </div>
-                                    <div style="padding: 16px;">
-                                        <div slot="headline"
-                                            style="font-size: 20px; font-weight: 900; margin-bottom: 2px;">
-                                            斐波那契数列
-                                        </div>
-                                        <div slot="subhead">计算数列第n项</div>
-                                    </div>
-                                </s-card>
-                            </a>
-
-                            <a href='javascript:loadexample(5)' style="margin-top: 10%;">
-                                <s-card clickable="true" type="outlined"
-                                    style="text-align: start; max-width: 240px; height: 205px; margin-bottom: 16px;">
-                                    <div slot="image">
-                                        <img src="/image/work_cover.webp" alt="" width="238px" height="128px">
-                                    </div>
-                                    <div style="padding: 16px;">
-                                        <div slot="headline"
-                                            style="font-size: 20px; font-weight: 900; margin-bottom: 2px;">
-                                            阶乘
-                                        </div>
-                                        <div slot="subhead">计算阶乘</div>
-                                    </div>
-                                </s-card>
-                            </a>
-
-                            <a href='javascript:loadexample(6)' style="margin-top: 10%;">
-                                <s-card clickable="true" type="outlined"
-                                    style="text-align: start; max-width: 240px; height: 205px; margin-bottom: 16px;">
-                                    <div slot="image">
-                                        <img src="/image/work_cover.webp" alt="" width="238px" height="128px">
-                                    </div>
-                                    <div style="padding: 16px;">
-                                        <div slot="headline"
-                                            style="font-size: 20px; font-weight: 900; margin-bottom: 2px;">
-                                            计算累加和
-                                        </div>
-                                        <div slot="subhead">计算1+2+...+n的总和</div>
-                                    </div>
-                                </s-card>
-                            </a>
-
-                        </div>
-                    </div>
-
-                    <s-button slot="action" type="text">退出</s-button>
-                </s-dialog>
-                <s-dialog id="dialog"
-                    style="padding: 16px; z-index: 9999; overflow: hidden; display: flex; flex-direction: row; align-items: start;">
-                    <h3
-                        style="margin-left: 2px; text-align: start; margin-bottom: 8px; width: auto; align-items: start;">
-                        作品
-                    </h3>
-                    <div style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
-                        <s-tab style="margin-bottom: 8px; width: 99%;">
-                            <s-tab-item selected="true">
-                                <div slot="text">我的作品</div>
-                            </s-tab-item>
-                        </s-tab>
-                        <div
-                            style="width: 100%; height: 64vh; display: grid;grid-row-gap: 24px;margin-left: 8px;grid-column-gap: 24px;grid-template-columns: repeat(3, calc(33.33% - 16px));overflow: auto;margin-bottom: 8px;">
-                        </div>
-                    </div>
-
-
-                    <s-button slot="action" type="text">退出</s-button>
-                </s-dialog>
-
-                <s-button type="filled-tonal" id="runcode" onclick="runcode();"
-                    style="font-size: 12px;height: 29px; background-color: #2cc18b; display: flex; flex-direction: row; align-items: center; padding-left: 12px; padding-right: 12px; padding-top: 2px; color: white;">
-                    <s-icon slot="start"
-                        style="color: white; margin-right: 4px; margin-bottom: 2px; width: 18px; height: 18px;">
-                        <svg t="1724751769826" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                            xmlns="http://www.w3.org/2000/svg" p-id="8659" width="512" height="512">
+                <li style="margin-left: 16px;">
+                    <button class="btn" id="runcode" onclick="runcode();"
+                        style="background-color: #3395FE; color: white; font-size: 12px; border-radius: 1200px; height: 29px; padding: 0 12px; display: flex; align-items: center;">
+                        <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"
+                            style="margin-right: 4px;">
                             <path
                                 d="M385.237333 228.266667l350.933334 210.56c55.253333 33.152 55.253333 113.194667 0 146.346666L385.28 795.733333c-40.789333 24.490667-89.6 10.325333-113.92-24.149333l-0.042667 0.042667a42.666667 42.666667 0 1 0-73.216 43.946666l-0.085333 0.042667c47.36 72.533333 147.626667 103.424 231.168 53.333333l350.933333-210.602666c110.506667-66.304 110.506667-226.389333 0-292.693334l-350.933333-210.56C315.392 86.826667 170.666667 168.746667 170.666667 301.44V640a42.666667 42.666667 0 1 0 85.333333 0V301.44C256 235.093333 328.362667 194.133333 385.237333 228.266667z"
-                                fill="white" p-id="8660"></path>
+                                fill="white" />
                         </svg>
-                    </s-icon>
-                    运行代码
-                </s-button>
+                        运行代码
+                    </button>
+                </li>
             </ul>
-
-        </s-page>
-
+        </div>
     </header>
 
-    <div id="mask" onclick="runcode();" style="flex-direction: column;">
-        <?xml version="1.0" encoding="UTF-8"?><svg style="margin-bottom: 8px;" width="48" height="48"
-            viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- 模板作品对话框 -->
+    <dialog id="dialog2" class="native-dialog" style="width: 90vw; max-width: 1200px;">
+        <div class="dialog-header">作品展示</div>
+        <div class="dialog-content">
+            <div class="divider"></div>
+            <div class="grid">
+                <a href="javascript:loadexample(1)" style="text-decoration: none;">
+                    <div class="card">
+                        <img src="/image/work_cover.webp" alt="你好世界" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title">你好世界</h3>
+                            <p class="card-subtitle">开启网页创作之旅</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="javascript:loadexample(2)" style="text-decoration: none;">
+                    <div class="card">
+                        <img src="/image/work_cover.webp" alt="计算器" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title">计算器</h3>
+                            <p class="card-subtitle">计算加减乘除乘方</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="javascript:loadexample(3)" style="text-decoration: none;">
+                    <div class="card">
+                        <img src="/image/work_cover.webp" alt="工具导航" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title">工具导航</h3>
+                            <p class="card-subtitle">实用的常用网页导航站</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="javascript:loadexample(4)" style="text-decoration: none;">
+                    <div class="card">
+                        <img src="/image/work_cover.webp" alt="斐波那契数列" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title">斐波那契数列</h3>
+                            <p class="card-subtitle">计算数列第n项</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="javascript:loadexample(5)" style="text-decoration: none;">
+                    <div class="card">
+                        <img src="/image/work_cover.webp" alt="阶乘" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title">阶乘</h3>
+                            <p class="card-subtitle">计算阶乘</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="javascript:loadexample(6)" style="text-decoration: none;">
+                    <div class="card">
+                        <img src="/image/work_cover.webp" alt="计算累加和" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title">计算累加和</h3>
+                            <p class="card-subtitle">计算1+2+...+n的总和</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="dialog-actions">
+            <button class="btn btn-text" onclick="document.getElementById('dialog2').close()">退出</button>
+        </div>
+    </dialog>
+
+    <!-- 我的作品对话框 -->
+    <dialog id="dialog" class="native-dialog" style="width: 90vw; max-width: 1200px;">
+        <div class="dialog-header">作品</div>
+        <div class="dialog-content">
+            <div style="margin-bottom: 16px;">
+                <button class="nav-tab active">我的作品</button>
+            </div>
+            <div class="divider"></div>
+            <div class="grid" id="worklist">
+                <!-- 作品列表将通过JavaScript动态加载 -->
+            </div>
+        </div>
+        <div class="dialog-actions">
+            <button class="btn btn-text" onclick="document.getElementById('dialog').close()">退出</button>
+        </div>
+    </dialog>
+
+    <!-- 代码显示区域 -->
+    <div id="code"
+        style="display: none; position: fixed; top: 60px; left: 0; width: 100%; height: calc(100% - 60px); background-color: #1D1F21; color: white; overflow: scroll; padding: 20px; z-index: 999; font-family: consola, serif;">
+        <pre id="codefa"><code id="code" class="language-html"></code></pre>
+    </div>
+
+    <!-- 运行遮罩 -->
+    <div id="mask" onclick="runcode();"
+        style="display: none; position: fixed; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; flex-direction: column; align-items: center; justify-content: center;">
+        <svg style="margin-bottom: 8px;" width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M18.2838 43.1713C14.9327 42.1736 11.9498 40.3213 9.58787 37.867C10.469 36.8227 11 35.4734 11 34.0001C11 30.6864 8.31371 28.0001 5 28.0001C4.79955 28.0001 4.60139 28.01 4.40599 28.0292C4.13979 26.7277 4 25.3803 4 24.0001C4 21.9095 4.32077 19.8938 4.91579 17.9995C4.94381 17.9999 4.97188 18.0001 5 18.0001C8.31371 18.0001 11 15.3138 11 12.0001C11 11.0488 10.7786 10.1493 10.3846 9.35011C12.6975 7.1995 15.5205 5.59002 18.6521 4.72314C19.6444 6.66819 21.6667 8.00013 24 8.00013C26.3333 8.00013 28.3556 6.66819 29.3479 4.72314C32.4795 5.59002 35.3025 7.1995 37.6154 9.35011C37.2214 10.1493 37 11.0488 37 12.0001C37 15.3138 39.6863 18.0001 43 18.0001C43.0281 18.0001 43.0562 17.9999 43.0842 17.9995C43.6792 19.8938 44 21.9095 44 24.0001C44 25.3803 43.8602 26.7277 43.594 28.0292C43.3986 28.01 43.2005 28.0001 43 28.0001C39.6863 28.0001 37 30.6864 37 34.0001C37 35.4734 37.531 36.8227 38.4121 37.867C36.0502 40.3213 33.0673 42.1736 29.7162 43.1713C28.9428 40.752 26.676 39.0001 24 39.0001C21.324 39.0001 19.0572 40.752 18.2838 43.1713Z"
-                fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" />
+                fill="none" stroke="#ffffff" stroke-width="4" />
             <path
                 d="M24 31C27.866 31 31 27.866 31 24C31 20.134 27.866 17 24 17C20.134 17 17 20.134 17 24C17 27.866 20.134 31 24 31Z"
-                fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" />
+                fill="none" stroke="#ffffff" stroke-width="4" />
         </svg>
-        <p style="color: white;font-size: 32px;margin-left: 0px; font-weight: bold; margin-bottom: 10px;">正在运行</p>
-        <p style="color: white;font-size: 18px;margin-top: 4px; font-weight: 500;">点击此处结束运行</p>
+        <p style="color: white; font-size: 32px; margin: 0 0 10px 0; font-weight: bold;">正在运行</p>
+        <p style="color: white; font-size: 18px; margin: 0;">点击此处结束运行</p>
     </div>
+
+
+    <!-- 工作区 -->
     <div id="blocklyDiv" data-intro="这是工作区，可拖拽积木，制作网页" data-title="工作区" style="z-index: 1;">
         <xml id="toolbox" style="display: none" xmlns="https://developers.google.com/blockly/xml">
-
             <category name="页面框架" categorystyle="mind-mapping">
                 <block type="go">
                     <field name="title">hello</field>
@@ -519,9 +373,7 @@
                 </block>
                 <block type="end"></block>
             </category>
-
             <sep></sep>
-
             <category name="文本内容" categorystyle="tag">
                 <block type="h1">
                     <field name="text">标题1</field>
@@ -539,24 +391,59 @@
                     <field name="text">段落文字</field>
                     <field name="id">id</field>
                 </block>
+                <block type="p_xy">
+                    <field name="text">段落文字</field>
+                    <field name="id">id</field>
+                    <field name="x">10</field>
+                    <field name="y">10</field>
+                </block>
                 <block type="div">
                     <field name="id">id</field>
                     <field name="color">white</field>
                 </block>
+                <block type="div_xy">
+                    <field name="id">id</field>
+                    <field name="color">white</field>
+                    <field name="x">10</field>
+                    <field name="y">10</field>
+                </block>
                 <block type="link">
                     <field name="text">百度</field>
                     <field name="link">https://baidu.com</field>
+                </block>
+                <block type="link_xy">
+                    <field name="text">百度</field>
+                    <field name="link">https://baidu.com</field>
+                    <field name="x">10</field>
+                    <field name="y">10</field>
                 </block>
                 <block type="image">
                     <field name="img">a.png</field>
                     <field name="height">100</field>
                     <field name="width">100</field>
                 </block>
+                <block type="image_xy">
+                    <field name="img">a.png</field>
+                    <field name="height">100</field>
+                    <field name="width">100</field>
+                    <field name="x">10</field>
+                    <field name="y">10</field>
+                </block>
                 <block type="ul">
                     <field name="id">id</field>
                 </block>
+                <block type="ul_xy">
+                    <field name="id">id</field>
+                    <field name="x">10</field>
+                    <field name="y">10</field>
+                </block>
                 <block type="ol">
                     <field name="id">id</field>
+                </block>
+                <block type="ol_xy">
+                    <field name="id">id</field>
+                    <field name="x">10</field>
+                    <field name="y">10</field>
                 </block>
                 <block type="li">
                     <field name="text">列表项</field>
@@ -564,6 +451,11 @@
                 </block>
                 <block type="table">
                     <field name="id">id</field>
+                </block>
+                <block type="table_xy">
+                    <field name="id">id</field>
+                    <field name="x">10</field>
+                    <field name="y">10</field>
                 </block>
                 <block type="tr_head">
                     <field name="id">id</field>
@@ -580,17 +472,27 @@
                     <field name="id">id</field>
                 </block>
             </category>
-
             <sep></sep>
-
             <category name="交互组件" categorystyle="switch-button">
                 <block type="button">
                     <field name="text">按钮</field>
                     <field name="link">https://example.com</field>
                 </block>
+                <block type="button_xy">
+                    <field name="text">按钮</field>
+                    <field name="link">https://example.com</field>
+                    <field name="x">10</field>
+                    <field name="y">10</field>
+                </block>
                 <block type="input">
                     <field name="id">input1</field>
                     <field name="type">text</field>
+                </block>
+                <block type="input_xy">
+                    <field name="id">input1</field>
+                    <field name="type">text</field>
+                    <field name="x">10</field>
+                    <field name="y">10</field>
                 </block>
                 <block type="click">
                     <field name="id">a</field>
@@ -601,16 +503,14 @@
                 </block>
                 <block type="on_key">
                     <field name="id">a</field>
-                    <field name="event">keydown</field>
+                    <field name="etype">keydown</field>
                 </block>
                 <block type="on_focus">
                     <field name="id">a</field>
-                    <field name="event">focus</field>
+                    <field name="etype">focus</field>
                 </block>
             </category>
-
             <sep></sep>
-
             <category name="样式布局" categorystyle="text-style-one">
                 <block type="style">
                     <field name="who">a</field>
@@ -637,7 +537,7 @@
                     <field name="size">16</field>
                 </block>
                 <block type="font_family">
-                    <field name="font">Arial</field>
+                    <field name="family">Arial</field>
                 </block>
                 <block type="bg_color">
                     <field name="color">white</field>
@@ -669,15 +569,16 @@
                     <field name="height">50</field>
                 </block>
                 <block type="position">
-                    <field name="pos">relative</field>
+                    <field name="mode">relative</field>
                 </block>
                 <block type="z-index">
                     <field name="c">1</field>
                 </block>
+                <block type="overflow">
+                    <field name="type">visible</field>
+                </block>
             </category>
-
             <sep></sep>
-
             <category name="命令脚本" categorystyle="devices">
                 <block type="js"></block>
                 <block type="alert"></block>
@@ -693,19 +594,15 @@
                     <field name="id">a</field>
                 </block>
                 <block type="set_interval">
-                    <field name="time">1000</field>
+                    <field name="ms">1000</field>
                 </block>
                 <block type="set_timeout">
-                    <field name="time">1000</field>
+                    <field name="ms">1000</field>
                 </block>
             </category>
-
             <sep></sep>
-
             <category name="变量" custom="VARIABLE" categorystyle="memory-one"></category>
-
             <sep></sep>
-
             <category name="数学逻辑" categorystyle="calculator">
                 <block type="controls_if"></block>
                 <block type="logic_compare"></block>
@@ -719,45 +616,46 @@
                         </shadow>
                     </value>
                 </block>
-                <block type="controls_for">
-                    <field name="VAR">i</field>
-                    <value name="FROM">
-                        <shadow type="math_number">
-                            <field name="NUM">1</field>
-                        </shadow>
-                    </value>
-                    <value name="TO">
-                        <shadow type="math_number">
-                            <field name="NUM">10</field>
-                        </shadow>
-                    </value>
-                    <value name="BY">
-                        <shadow type="math_number">
-                            <field name="NUM">1</field>
-                        </shadow>
-                    </value>
-                </block>
-                <block type="controls_forEach">
-                    <field name="VAR">j</field>
-                </block>
-                <block type="lists_create_with">
-                    <mutation items="3"></mutation>
-                </block>
                 <block type="math_number">
-                    <field name="NUM">123</field>
+                    <field name="NUM">0</field>
                 </block>
-                <block type="math_arithmetic"></block>
-                <block type="math_random_int"></block>
+                <block type="math_arithmetic">
+                    <value name="A">
+                        <shadow type="math_number">
+                            <field name="NUM">1</field>
+                        </shadow>
+                    </value>
+                    <value name="B">
+                        <shadow type="math_number">
+                            <field name="NUM">1</field>
+                        </shadow>
+                    </value>
+                </block>
+                <block type="text">
+                    <field name="TEXT"></field>
+                </block>
+                <block type="text_join">
+                    <mutation items="2"></mutation>
+                    <value name="ADD0">
+                        <shadow type="text">
+                            <field name="TEXT"></field>
+                        </shadow>
+                    </value>
+                    <value name="ADD1">
+                        <shadow type="text">
+                            <field name="TEXT"></field>
+                        </shadow>
+                    </value>
+                </block>
             </category>
-
         </xml>
-
-        <xml id="workspaceBlocks" style="display: none" xmlns="https://developers.google.com/blockly/xml"></xml>
+        <xml id="workspaceBlocks" xmlns="https://developers.google.com/blockly/xml"></xml>
     </div>
 
+
     <pre id="codefa"><code id="code" class="language-html"></code></pre>
-    <div id="look" data-intro="这是预览区，可实时查看网页效果，运行代码后可自由交互" data-title="预览区"><iframe id="look_html" width="100%"
-            height="100%" style="border: 0;"></iframe></div>
+    <div id="look" data-intro="这是预览区，可实时查看网页效果，运行代码后可自由交互" data-title="预览区"><iframe id="look_html" height="100%"
+            style="border: 0;"></iframe></div>
 
     <div id="look_pos"></div>
     <div style="margin-bottom: 8px; display: none;" id="code_list">
@@ -776,91 +674,146 @@
         </a>
     </div>
 
+    <div class="blcokly-action-buttons">
+
+        <div class="blcokly-action-buttons-item">
+            <div class="blcokly-action-buttons-item-icon">
+                <svg style="transform: translateX(0px);" xmlns='http://www.w3.org/2000/svg' width='20' height='20'
+                    viewBox='0 0 24 24'>
+                    <title>回到中心</title>
+                   <g id="map_pin_line" fill='none' fill-rule='evenodd'><path d='M24 0v24H0V0zM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01z'/><path fill='#09244BFF' d='M12 4a3 3 0 1 0 0 6 3 3 0 0 0 0-6M7 7a5 5 0 1 1 6 4.9V17a1 1 0 1 1-2 0v-5.1A5.002 5.002 0 0 1 7 7m2.489 9.1a1 1 0 0 1-.838 1.14c-1.278.194-2.293.489-2.96.815-1.22.597.206 1.026.95 1.258C7.968 19.728 9.863 20 12 20s4.032-.272 5.359-.687c.749-.234 2.17-.66.95-1.258-.667-.326-1.682-.62-2.96-.815a1 1 0 1 1 .301-1.977c1.388.21 2.622.547 3.539.996.884.433 1.811 1.162 1.811 2.241 0 .811-.524 1.4-1.034 1.777C17.816 21.865 14.536 22 12 22c-2.282 0-4.387-.288-5.955-.778C4.795 20.832 3 20.062 3 18.5c0-1.08.927-1.808 1.811-2.24.917-.45 2.152-.786 3.538-.997a1 1 0 0 1 1.14.838Z'/></g>
+                </svg>
+            </div>
+            回中
+        </div>
+
+        <div class="blcokly-action-buttons-item">
+            <div class="blcokly-action-buttons-item-icon">
+                <svg style="transform: translateX(-0.5px);" xmlns='http://www.w3.org/2000/svg' width='20' height='20'
+                    viewBox='0 0 24 24'>
+                    <title>放大工作区</title>
+                    <g id="add_line" fill='none'>
+                        <path
+                            d='M24 0v24H0V0zM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01z' />
+                        <path fill='#09244BFF'
+                            d='M11 20a1 1 0 1 0 2 0v-7h7a1 1 0 1 0 0-2h-7V4a1 1 0 1 0-2 0v7H4a1 1 0 1 0 0 2h7z' />
+                    </g>
+                </svg>
+            </div>
+            放大
+        </div>
+
+
+        <div class="blcokly-action-buttons-item">
+            <div class="blcokly-action-buttons-item-icon">
+                <svg style="transform: translateX(-0px);" xmlns='http://www.w3.org/2000/svg' width='20' height='20'
+                    viewBox='0 0 24 24'>
+                        <title>缩小工作区</title>
+                        <g id="minimize_line" fill='none' fill-rule='evenodd'>
+                            <path
+                                d='M24 0v24H0V0zM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01z' />
+                            <path fill='#09244BFF' d='M3 12a1 1 0 0 1 1-1h16a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1' />
+                        </g>
+                  
+                </svg>
+            </div>
+            缩小
+        </div>
+
+    </div>
+
     <div id="n"></div>
-
-    <div id="import" onload="document.querySelector('#dialog1').show()" style="display: none;">
-
-        <h1>导入/导出</h1>
-
-        <hr>
-
-        <div class="input-section">
-            <input id="data" placeholder="请输入积木数据" type="text" class="datainput">
-            <button id="a" style="margin-right: 10px;">导入积木</button>
-            <input id="importFile" accept=".json" type="file">
-        </div>
-
-        <hr>
-
-        <div class="input-section">
-            <p>积木数据:</p>
-            <input id="json" disabled placeholder="请先导出积木" type="text">
-            <button id="b">导出积木</button>
-        </div>
-
-    </div>
-
-    <div id="g-apk">
-        <div id="g-apk-child">
-            <p style="font-size: 24px;margin-bottom: 20px; font-weight: 900;">作品打包 - APK</p>
-            <hr />
-            <p style="font-size: 16px; margin-top: 20px;">应用名称<br><input type="text" id="app_name"
-                    style="border: 1px solid #ccc; border-radius: 5px; padding: 8px; font-size: 16px; margin-top: 6px;"
-                    placeholder="请输入应用名称"></p>
-            <p style="font-size: 20px; margin-top: 20px;margin-bottom: 20px;">
-            <p style="margin-bottom: 20px;font-size: 16px;">应用图标（推荐512x512，一定要是正方形）</p>
-            <label for="app_icon">
-                <div style="
-                	width: 64px;
-	                height: 20px;
-	                font-size: 14px;
-	                line-height: 1.15;
-	                display: flex;
-	                justify-content: center;
-	                align-items: center;
-	                border-radius: 12px;
-	                padding: 8px 10px;
-	                transition: all 0.5s;
-	                white-space: nowrap;
-	                background-color: #335bc8;
-	                color: white;
-                "><span>选择文件</span></div>
-            </label>
-            <input type="file" id="app_icon" style="display: none;">
-            </p>
-            <button id="apk_g"
-                style="margin-top: 30px;padding: 7px;border-radius: 10px;background-color: #33c8b9;border: 0;width: 70px;color: white;margin-left: 0%;">打包</button>
-            <button onclick='$("#g-apk").css("display","none");'
-                style="padding: 7px;border-radius: 10px;background-color: #c83333;border: 0;width: 70px;color: white;margin-left: 10%;">取消</button>
-        </div>
-    </div>
-
-    <div id="cloudwork">
-        <div id="cloudwork-child">
-            <p style="font-size: 24px;margin-bottom: 20px; font-weight: 900;">保存为云作品</p>
-            <hr />
-            <p style="font-size: 16px; margin-top: 20px;">作品名称<br>
-                <input type="text" id="workname"
-                    style="border: 1px solid #ccc; border-radius: 5px; padding: 8px; font-size: 16px; margin-top: 6px;"
-                    placeholder="请输入应用名称">
-            </p>
-            <button id="save"
-                style="margin-top: 30px;padding: 7px;border-radius: 10px;background-color: #33c8b9;border: 0;width: 70px;color: white;margin-left: 0%;">保存</button>
-            <button onclick='$("#cloudwork").css("display","none");'
-                style="padding: 7px;border-radius: 10px;background-color: #c83333;border: 0;width: 70px;color: white;margin-left: 10%;">取消</button>
-        </div>
-    </div>
-
-
     <script src="./js/renderer.js"></script>
+    <script src="./js/multi-page-manager.js"></script>
+    <script src="./js/custom-workspace-buttons.js"></script>
     <script src="./blocks/msg.js"></script>
     <script src="./blocks/get.js"></script>
     <script src="./blocks/get.js.js"></script>
     <script src="./blocks/workspace.js"></script>
+    
 
     <script src="./js/prism.min.js"></script>
     <script>Prism.highlightAll();</script>
+    <script>
+        // 下拉菜单功能
+        function toggleDropdown(button) {
+            const dropdown = button.nextElementSibling;
+            const allDropdowns = document.querySelectorAll('.dropdown-menu');
 
+            // 关闭其他下拉菜单
+            allDropdowns.forEach(d => {
+                if (d !== dropdown) {
+                    d.classList.remove('show');
+                }
+            });
+
+            // 切换当前下拉菜单
+            dropdown.classList.toggle('show');
+        }
+
+        // 点击外部关闭下拉菜单
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-menu').forEach(d => {
+                    d.classList.remove('show');
+                });
+            }
+        });
+
+        // 主题切换功能
+        function setTheme(color) {
+            $.cookie("theme", color);
+            $(".navbar").css("background-color", color);
+
+            try {
+                const blocklyDiv = document.getElementById('blocklyDiv');
+                if (blocklyDiv) {
+                    const mainBackground = blocklyDiv.querySelector('.blocklyMainBackground');
+                    const toolboxDiv = blocklyDiv.querySelector('.blocklyToolboxDiv');
+
+                    if (mainBackground) {
+                        mainBackground.style.fill = color === "#494949" ? '#1f1f1f' : '#f2f3f7';
+                    }
+
+                    if (toolboxDiv) {
+                        toolboxDiv.style.backgroundColor = color === "#494949" ? '#c2c2c2' : '#fff';
+                        toolboxDiv.style.borderRight = '1px solid #e5e7eb';
+                    }
+                }
+            } catch (e) {
+                console.warn('Blockly元素未找到，主题设置部分生效');
+            }
+
+            // 关闭主题选择器
+            $('#box-parent').hide();
+        }
+
+        // 深色模式切换
+        function moon() {
+            if ($.cookie("theme") != "#494949") {
+                setTheme("#494949");
+            } else {
+                setTheme("#ffffff");
+            }
+        }
+
+        // 初始化主题
+        $(document).ready(function () {
+            const savedTheme = $.cookie("theme") || "#ffffff";
+            setTheme(savedTheme);
+            /*
+            // 初始化多页面功能
+            if (typeof MultiPageManager !== 'undefined') {
+                window.multiPageManager = new MultiPageManager();
+                
+                // 绑定多页面切换按钮
+                $('#multi-page-toggle').on('click', function() {
+                    window.multiPageManager.toggleMultiPageMode();
+                });
+            }
+                */
+        });
+    </script>
 </body>
 
 </html>

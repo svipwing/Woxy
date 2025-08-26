@@ -24,7 +24,7 @@ msg = {
     "CHANGE_VALUE_TITLE": "更改值：",
     "RENAME_VARIABLE": "重命名变量",
     "RENAME_VARIABLE_TITLE": "将变量“%1”重命名为:",
-    "NEW_VARIABLE": "创建一个变量",
+    "NEW_VARIABLE": "＋ 创建一个变量",
     "NEW_STRING_VARIABLE": "创建字符串变量...",
     "NEW_NUMBER_VARIABLE": "创建数字变量...",
     "NEW_COLOUR_VARIABLE": "创建颜色变量...",

@@ -5,35 +5,42 @@
     font-style: normal
 }
 
+/* 全局重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #F1F2F6;
+    color: #333;
+    line-height: 1.6;
+}
+
 .navbar {
     left: 0;
     width: 100%;
-    padding: 10px;
-    position: fixed
-}
-
-.navbar {
+    padding: 0 20px;
+    position: fixed;
     top: 0;
-    height: 56px;
-    background-color: #2196f3;
+    height: 60px;
+    background-color: #ffffff !important;
     box-sizing: border-box;
-    z-index: 9998;
-    color: #fff;
+    z-index: 100;
+    color: #383838 !important;
     display: flex;
-    align-items: center;  
-    justify-content: flex-start;
-}
-
-.navbar li a,
-.navbar ul,
-div#nav {
-    display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1px solid #e9e9e9;
 }
 
 .navbar ul {
-    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -41,14 +48,26 @@ div#nav {
 }
 
 .navbar li a {
-    padding: 15px 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 6px 12px;
+    padding-left: 15px;
     cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    border-radius: 8px;
+    margin: 0 5px;
+}
+
+.navbar li a:hover {
+    background-color: rgba(194, 194, 194, 0.24);
 }
 
 .navbar li a svg {
-    height: 20px;
-    width: 20px;
-    fill: #fff;
+    height: 16px;
+    width: 16px;
+    margin-right: 4px;
 }
 
 @font-face {
@@ -164,9 +183,18 @@ input button[type=file] {
 }
 
 .blocklyFlyout {
-    backdrop-filter: blur(50px);
-    border-radius: 4px;
-    border-right: 0.001px solid rgba(255, 253, 253, 0.7);
+    background-color: rgb(255, 253, 253);
+    padding-top: 14px;
+    border-top-right-radius: 17px;
+    border-bottom-right-radius: 10px;
+    border-right: 0.5px solid rgba(156, 156, 156, 0.39);
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.1);
+    min-width: 200px !important;
+}
+
+.blocklyScrollbarHandle {
+    width: 6px;
+    transform: translateX(3px);
 }
 
 .blocklyFlyoutBackground {
@@ -176,6 +204,7 @@ input button[type=file] {
 #blocklyDiv .blocklyToolboxDiv {
     background-color: #fff;
     border-right: 1px solid #e5e7eb;
+    box-shadow: 8px 0 18px rgba(0, 0, 0, 0.075);
 }
 
 #blocklyDiv {
@@ -205,6 +234,106 @@ input button[type=file] {
 
 #blocklyDiv .blocklyTreeSeparator {
     margin: 0;
+    border: none;
+}
+
+#blocklyDiv .blocklyTreeRowContentContainer span {
+    color: #B6B6B6 !important;
+    font-size: 13px;
+}
+
+
+#blocklyDiv .blocklyTreeRowContentContainer iconpark-icon {
+    font-size: 13px;
+    padding: 9px;
+    margin-bottom: 3px;
+    border-radius: 7px;
+}
+
+iconpark-icon {
+    background-color: #DDE8FF;
+    color: #5C69C7;
+    border-radius: 7px;
+    padding: 9px;
+    margin-bottom: 3px;
+    padding-bottom: 4px !important;
+    font-size: 13px;
+    display: block;
+}
+
+.blocklyToolboxCategory[aria-labelledby="blockly-0.label"] iconpark-icon {
+    background-color: #DDE8FF !important;
+    color: #5C69C7 !important;
+}
+
+.blocklyToolboxCategory[aria-labelledby="blockly-2.label"] iconpark-icon {
+    background-color: #DAF5EA !important;
+    color: #28A370 !important;
+}
+
+.blocklyToolboxCategory[aria-labelledby="blockly-4.label"] iconpark-icon {
+    background-color: #EAE6F5 !important;
+    color: #8C67D1 !important;
+}
+
+.blocklyToolboxCategory[aria-labelledby="blockly-6.label"] iconpark-icon {
+    background-color: #DBF0F3 !important;
+    color: #65C6CF !important;
+}
+
+.blocklyToolboxCategory[aria-labelledby="blockly-8.label"] iconpark-icon {
+    background-color: #EBEBED !important;
+    color: #4b4b4b !important;
+}
+
+.blocklyToolboxCategory[aria-labelledby="blockly-a.label"] iconpark-icon {
+    background-color: #FFF4C8 !important;
+    color: #F2CD74 !important;
+}
+
+.blocklyToolboxCategory[aria-labelledby="blockly-c.label"] iconpark-icon {
+    background-color: #FFE6D5 !important;
+    color: #E88A64 !important;
+}
+
+#blocklyDiv .blocklyToolboxDiv .blocklyToolboxContents .blocklyToolboxCategory[categorystyle="tag"] .blocklyTreeRow .blocklyTreeRowContentContainer iconpark-icon {
+    background-color: #DAF5EA !important;
+    color: #28A370 !important;
+}
+
+#blocklyDiv .blocklyToolboxDiv .blocklyToolboxContents .blocklyToolboxCategory[categorystyle="switch-button"] .blocklyTreeRow .blocklyTreeRowContentContainer iconpark-icon {
+    background-color: #DDE8FF !important;
+    color: #5C69C7 !important;
+}
+
+#blocklyDiv .blocklyToolboxDiv .blocklyToolboxContents .blocklyToolboxCategory[categorystyle="text-style-one"] .blocklyTreeRow .blocklyTreeRowContentContainer iconpark-icon {
+    background-color: #DDE8FF !important;
+    color: #5C69C7 !important;
+}
+
+#blocklyDiv .blocklyToolboxDiv .blocklyToolboxContents .blocklyToolboxCategory[categorystyle="devices"] .blocklyTreeRow .blocklyTreeRowContentContainer iconpark-icon {
+    background-color: #DDE8FF !important;
+    color: #5C69C7 !important;
+}
+
+#blocklyDiv .blocklyToolboxDiv .blocklyToolboxContents .blocklyToolboxCategory[custom="VARIABLE"] .blocklyTreeRow .blocklyTreeRowContentContainer iconpark-icon {
+    background-color: #DDE8FF !important;
+    color: #5C69C7 !important;
+}
+
+#blocklyDiv .blocklyToolboxDiv .blocklyToolboxContents .blocklyToolboxCategory[categorystyle="calculator"] .blocklyTreeRow .blocklyTreeRowContentContainer iconpark-icon {
+    background-color: #DDE8FF !important;
+    color: #5C69C7 !important;
+}
+
+#blocklyDiv .blocklyTreeSelected {
+    background-color: #fffffd00 !important;
+}
+
+#blocklyDiv .blocklyToolboxDiv {
+    background-color: #fff;
+    padding: 10px 5px 0px 4px;
+    border-right: 1px solid #e5e7eb;
 }
 
 .gitrepo {
@@ -292,8 +421,6 @@ input button[type=file] {
 }
 
 body {
-    background-image: url(https://static.codemao.cn/pickduck/rJ74KWDs0.jpg?hash=FsP728EZjY33-BSUhdk1AAvoYiRY);
-    background-size: 100% 100%;
     margin-top: 0;
     bottom: 0;
     position: absolute;
@@ -314,6 +441,3706 @@ body {
     display: none;
     justify-content: center;
     align-items: center;
+}
+
+/* 原生HTML组件样式 - 替换s-组件 */
+
+/* 基础样式重置 */
+* {
+    box-sizing: border-box;
+}
+
+/* 对话框样式 */
+.native-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: hidden;
+    border: none;
+    padding: 0;
+}
+
+.native-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-header {
+    padding: 20px 24px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.dialog-content {
+    padding: 20px 24px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.dialog-actions {
+    padding: 0 24px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* 按钮样式 */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    min-height: 36px;
+}
+
+.btn-primary {
+    background-color: #2196f3;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #1976d2;
+    transform: translateY(-1px);
+}
+
+.btn-outlined {
+    background-color: transparent;
+    color: #2196f3;
+    border: 1px solid #2196f3;
+}
+
+.btn-outlined:hover {
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+.btn-text {
+    background-color: transparent;
+    color: #2196f3;
+    padding: 8px 12px;
+}
+
+.btn-text:hover {
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+/* 文本输入框样式 */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.form-control:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+}
+
+/* 弹出菜单样式 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 180px;
+    padding: 6px 0;
+    margin: 4px 0 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu.show {
+    display: flex;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    gap: 6px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #dad9d9;
+}
+
+.dropdown-item svg {
+    margin-right: 12px;
+    width: 18px;
+    fill: currentColor;
+    height: 18px;
+    position: relative;
+    top: 0.75px;
+}
+
+/* 卡片样式 */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 128px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 4px;
+    color: #1a1a1a;
+}
+
+.card-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* 标签页样式 */
+.nav-tabs {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 16px;
+}
+
+.nav-tab {
+    padding: 12px 24px;
+    border: none;
+    background: none;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.nav-tab.active {
+    color: #2196f3;
+    border-bottom-color: #2196f3;
+}
+
+.nav-tab:hover:not(.active) {
+    color: #333;
+    border-bottom-color: #ccc;
+}
+
+/* 分隔线样式 */
+.divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 12px 0;
+}
+
+/* 图标样式 */
+.icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+/* 网格布局 */
+.grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .native-dialog {
+        width: 95vw;
+        margin: 20px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dropdown-menu {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 12px 12px 0 0;
+        margin: 0;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.native-dialog[open] {
+    animation: slideIn 0.2s ease;
+}
+
+.dropdown-menu.show {
+    animation: fadeIn 0.2s ease;
+}
+
+/* 导航栏样式 */
+.navbar .dropdown-toggle {
+    color: #383838 !important;
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.navbar .dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar .dropdown-menu {
+    margin-top: 0px;
+
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 主题选择器样式 */
+.theme-selector {
+    cursor: pointer;
+    padding: 12px 16px;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.theme-selector:hover {
+    background-color: #f5f5f5;
+}
+
+.theme-blue {
+    background-color: #2196f3;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.theme-purple {
+    background-color: #6d50f0;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.theme-black {
+    background-color: #494949;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.blocklyTreeRowSelected .blocklyTreeLabel {
+    background: inherit !important;
+    color: inherit !important;
+    border-radius: inherit !important;
+    padding: 8px 16px !important;
+    font-weight: inherit !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.blocklyTreeRow[style*="A65C81"].blocklyTreeRowSelected .blocklyTreeLabel,
+.blocklyTreeRow[aria-label*="变量"].blocklyTreeRowSelected .blocklyTreeLabel,
+.blocklyTreeRow[aria-label*="Variable"].blocklyTreeRowSelected .blocklyTreeLabel {
+    background: #FEE7C5 !important;
+    color: #2c2c2c !important;
+    border-radius: 8px !important;
+    padding: 16px 40px !important;
+    font-weight: bold !important;
+    box-shadow: 0 2px 8px rgba(254, 231, 197, 0.5) !important;
+    border: 2px solid #E6D3B7 !important;
+}
+
+.blocklyTreeRow[style*="A65C81"].blocklyTreeRowSelected .blocklyTreeLabel:hover,
+.blocklyTreeRow[aria-label*="变量"].blocklyTreeRowSelected .blocklyTreeLabel:hover,
+.blocklyTreeRow[aria-label*="Variable"].blocklyTreeRowSelected .blocklyTreeLabel:hover {
+    background: #F5D9A8 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(245, 217, 168, 0.6) !important;
+}
+
+.blocklyFlyoutButton rect {
+    fill: #FEE7C5 !important;
+    /* stroke: #E6D3B7 !important; */
+    stroke-width: 4 !important;
+    rx: 6 !important;
+    ry: 6 !important;
+    padding: 10px;
+    width: 84%;
+    height: 30px !important;
+    text-align: center
+}
+
+.blocklyText {
+    position: relative !important;
+    top: 5px !important;
+}
+
+/* 自定义工作区按钮容器 */
+.blcokly-action-buttons {
+    position: absolute;
+    right: 30px;
+    width: 56px;
+    padding: 4px 4px;
+    bottom: 28px;
+    background-color: white;
+    z-index: 10000;
+    border-radius: 8px;
+    box-shadow: 0 3px 18px rgba(0, 0, 0, 0.103);
+}
+
+/* 自定义工作区按钮项 */
+.blcokly-action-buttons-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 8px;
+    font-size: 12px;
+    gap: 3px;
+    border-radius: 6px;
+    padding-bottom: 5px;
+    transition: all 0.15s ease;
+    color: #09244B;
+    cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
+    position: relative;
+}
+
+.blcokly-action-buttons-item:hover,
+.blcokly-action-buttons-item.btn-focused {
+    background-color: rgba(233, 231, 231, 0.733);
+    transform: translateY(-1px);
+}
+
+.blcokly-action-buttons-item:active,
+.blcokly-action-buttons-item.btn-pressed,
+.blcokly-action-buttons-item.btn-active {
+    background-color: rgba(200, 200, 200, 0.8);
+    transform: translateY(0);
+}
+
+.blcokly-action-buttons-item.btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.blcokly-action-buttons-item:focus-visible {
+    outline: 2px solid #2196f3;
+    outline-offset: 2px;
+}
+
+.blcokly-action-buttons-item-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blcokly-action-buttons-item-icon svg {
+    fill: #09244B;
+    transition: fill 0.15s ease;
+}
+
+.blcokly-action-buttons-item.btn-disabled .blcokly-action-buttons-item-icon svg {
+    fill: #999;
+}
+
+.blcokly-action-buttons-item-text {
+    font-size: 12px;
+    color: inherit;
+}
+
+/* 响应式设计 */
+.blcokly-action-buttons.mobile-layout {
+    right: 15px;
+    bottom: 15px;
+    width: 48px;
+}
+
+.blcokly-action-buttons.mobile-layout .blcokly-action-buttons-item {
+    padding: 6px;
+    font-size: 10px;
+}
+
+.blcokly-action-buttons.mobile-layout .blcokly-action-buttons-item-icon {
+    width: 14px;
+    height: 14px;
+}
+
+
+/* 隐藏原生Blockly缩放控件 */
+.blocklyZoom {
+    display: none !important;
+}
+
+/* 原生HTML组件样式 - 替换s-组件 */
+
+/* 基础样式重置 */
+* {
+    box-sizing: border-box;
+}
+
+/* 对话框样式 */
+.native-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: hidden;
+    border: none;
+    padding: 0;
+}
+
+.native-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-header {
+    padding: 20px 24px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.dialog-content {
+    padding: 20px 24px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.dialog-actions {
+    padding: 0 24px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* 按钮样式 */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    min-height: 36px;
+}
+
+.btn-primary {
+    background-color: #2196f3;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #1976d2;
+    transform: translateY(-1px);
+}
+
+.btn-outlined {
+    background-color: transparent;
+    color: #2196f3;
+    border: 1px solid #2196f3;
+}
+
+.btn-outlined:hover {
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+.btn-text {
+    background-color: transparent;
+    color: #2196f3;
+    padding: 8px 12px;
+}
+
+.btn-text:hover {
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+/* 文本输入框样式 */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.form-control:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+}
+
+/* 弹出菜单样式 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 180px;
+    padding: 6px 0;
+    margin: 4px 0 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu.show {
+    display: flex;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    gap: 6px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #dad9d9;
+}
+
+.dropdown-item svg {
+    margin-right: 12px;
+    width: 18px;
+    fill: currentColor;
+    height: 18px;
+    position: relative;
+    top: 0.75px;
+}
+
+/* 卡片样式 */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 128px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 4px;
+    color: #1a1a1a;
+}
+
+.card-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* 标签页样式 */
+.nav-tabs {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 16px;
+}
+
+.nav-tab {
+    padding: 12px 24px;
+    border: none;
+    background: none;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.nav-tab.active {
+    color: #2196f3;
+    border-bottom-color: #2196f3;
+}
+
+.nav-tab:hover:not(.active) {
+    color: #333;
+    border-bottom-color: #ccc;
+}
+
+/* 分隔线样式 */
+.divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 12px 0;
+}
+
+/* 图标样式 */
+.icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+/* 网格布局 */
+.grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .native-dialog {
+        width: 95vw;
+        margin: 20px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dropdown-menu {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 12px 12px 0 0;
+        margin: 0;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.native-dialog[open] {
+    animation: slideIn 0.2s ease;
+}
+
+.dropdown-menu.show {
+    animation: fadeIn 0.2s ease;
+}
+
+/* 导航栏样式 */
+.navbar .dropdown-toggle {
+    color: #383838 !important;
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.navbar .dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar .dropdown-menu {
+    margin-top: 0px;
+
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 主题选择器样式 */
+.theme-selector {
+    cursor: pointer;
+    padding: 12px 16px;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.theme-selector:hover {
+    background-color: #f5f5f5;
+}
+
+.theme-blue {
+    background-color: #2196f3;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.theme-purple {
+    background-color: #6d50f0;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.theme-black {
+    background-color: #494949;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.blocklyTreeRowSelected .blocklyTreeLabel {
+    background: inherit !important;
+    color: inherit !important;
+    border-radius: inherit !important;
+    padding: 8px 16px !important;
+    font-weight: inherit !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.blocklyTreeRow[style*="A65C81"].blocklyTreeRowSelected .blocklyTreeLabel,
+.blocklyTreeRow[aria-label*="变量"].blocklyTreeRowSelected .blocklyTreeLabel,
+.blocklyTreeRow[aria-label*="Variable"].blocklyTreeRowSelected .blocklyTreeLabel {
+    background: #FEE7C5 !important;
+    color: #2c2c2c !important;
+    border-radius: 8px !important;
+    padding: 16px 40px !important;
+    font-weight: bold !important;
+    box-shadow: 0 2px 8px rgba(254, 231, 197, 0.5) !important;
+    border: 2px solid #E6D3B7 !important;
+}
+
+.blocklyTreeRow[style*="A65C81"].blocklyTreeRowSelected .blocklyTreeLabel:hover,
+.blocklyTreeRow[aria-label*="变量"].blocklyTreeRowSelected .blocklyTreeLabel:hover,
+.blocklyTreeRow[aria-label*="Variable"].blocklyTreeRowSelected .blocklyTreeLabel:hover {
+    background: #F5D9A8 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(245, 217, 168, 0.6) !important;
+}
+
+.blocklyFlyoutButton rect {
+    fill: #FEE7C5 !important;
+    /* stroke: #E6D3B7 !important; */
+    stroke-width: 4 !important;
+    rx: 6 !important;
+    ry: 6 !important;
+    padding: 10px;
+    width: 84%;
+    height: 30px !important;
+    text-align: center
+}
+
+.blocklyText {
+    position: relative !important;
+    top: 5px !important;
+}
+
+/* 自定义工作区按钮容器 */
+.blcokly-action-buttons {
+    position: absolute;
+    right: 30px;
+    width: 56px;
+    padding: 4px 4px;
+    bottom: 28px;
+    background-color: white;
+    z-index: 10000;
+    border-radius: 8px;
+    box-shadow: 0 3px 18px rgba(0, 0, 0, 0.103);
+}
+
+/* 自定义工作区按钮项 */
+.blcokly-action-buttons-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 8px;
+    font-size: 12px;
+    gap: 3px;
+    border-radius: 6px;
+    padding-bottom: 5px;
+    transition: all 0.15s ease;
+    color: #09244B;
+    cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
+    position: relative;
+}
+
+.blcokly-action-buttons-item:hover,
+.blcokly-action-buttons-item.btn-focused {
+    background-color: rgba(233, 231, 231, 0.733);
+    transform: translateY(-1px);
+}
+
+.blcokly-action-buttons-item:active,
+.blcokly-action-buttons-item.btn-pressed,
+.blcokly-action-buttons-item.btn-active {
+    background-color: rgba(200, 200, 200, 0.8);
+    transform: translateY(0);
+}
+
+.blcokly-action-buttons-item.btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.blcokly-action-buttons-item:focus-visible {
+    outline: 2px solid #2196f3;
+    outline-offset: 2px;
+}
+
+.blcokly-action-buttons-item-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blcokly-action-buttons-item-icon svg {
+    fill: #09244B;
+    transition: fill 0.15s ease;
+}
+
+.blcokly-action-buttons-item.btn-disabled .blcokly-action-buttons-item-icon svg {
+    fill: #999;
+}
+
+.blcokly-action-buttons-item-text {
+    font-size: 12px;
+    color: inherit;
+}
+
+/* 响应式设计 */
+.blcokly-action-buttons.mobile-layout {
+    right: 15px;
+    bottom: 15px;
+    width: 48px;
+}
+
+.blcokly-action-buttons.mobile-layout .blcokly-action-buttons-item {
+    padding: 6px;
+    font-size: 10px;
+}
+
+.blcokly-action-buttons.mobile-layout .blcokly-action-buttons-item-icon {
+    width: 14px;
+    height: 14px;
+}
+
+
+/* 隐藏原生Blockly缩放控件 */
+.blocklyZoom {
+    display: none !important;
+}
+
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+    .blcokly-action-buttons-item {
+        border: 1px solid #09244B;
+    }
+
+    .blcokly-action-buttons-item:hover,
+    .blcokly-action-buttons-item.btn-focused {
+        background-color: #09244B;
+        color: white;
+    }
+
+    .blcokly-action-buttons-item:hover .blcokly-action-buttons-item-icon svg,
+    .blcokly-action-buttons-item.btn-focused .blcokly-action-buttons-item-icon svg {
+        fill: white;
+    }
+}
+
+/* 减少动画模式支持 */
+@media (prefers-reduced-motion: reduce) {
+
+    .blcokly-action-buttons-item,
+    .blcokly-action-buttons-item-icon svg,
+    .workspace-toast {
+        transition: none;
+    }
+}
+
+/* Blockly工具箱飞出面板动画 */
+.blocklyFlyout {
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+}
+
+/* 展开状态 */
+.blocklyFlyout[style*="display: block"],
+.blocklyFlyout:not([style*="display: none"]) {
+    animation: flyoutSlideIn 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) forwards !important;
+}
+
+/* 收起状态 */
+.blocklyFlyout[style*="display: none"] {
+    animation: flyoutSlideOut 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) forwards !important;
+}
+
+/* 滑入动画关键帧 */
+@keyframes flyoutSlideIn {
+    0% {
+        transform: translateX(-100%) !important;
+        opacity: 0 !important;
+    }
+
+    50% {
+        opacity: 0.7 !important;
+    }
+
+    100% {
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+    }
+}
+
+/* 滑出动画关键帧 */
+@keyframes flyoutSlideOut {
+    0% {
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+    }
+
+    50% {
+        opacity: 0.7 !important;
+    }
+
+    100% {
+        transform: translateX(-100%) !important;
+        opacity: 0 !important;
+    }
+}
+
+/* 原生HTML组件样式 - 替换s-组件 */
+
+/* 基础样式重置 */
+* {
+    box-sizing: border-box;
+}
+
+/* 对话框样式 */
+.native-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: hidden;
+    border: none;
+    padding: 0;
+}
+
+.native-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-header {
+    padding: 20px 24px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.dialog-content {
+    padding: 20px 24px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.dialog-actions {
+    padding: 0 24px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* 按钮样式 */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    min-height: 36px;
+}
+
+.btn-primary {
+    background-color: #2196f3;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #1976d2;
+    transform: translateY(-1px);
+}
+
+.btn-outlined {
+    background-color: transparent;
+    color: #2196f3;
+    border: 1px solid #2196f3;
+}
+
+.btn-outlined:hover {
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+.btn-text {
+    background-color: transparent;
+    color: #2196f3;
+    padding: 8px 12px;
+}
+
+.btn-text:hover {
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+/* 文本输入框样式 */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.form-control:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+}
+
+/* 弹出菜单样式 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 180px;
+    padding: 6px 0;
+    margin: 4px 0 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu.show {
+    display: flex;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    gap: 6px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #dad9d9;
+}
+
+.dropdown-item svg {
+    margin-right: 12px;
+    width: 18px;
+    fill: currentColor;
+    height: 18px;
+    position: relative;
+    top: 0.75px;
+}
+
+/* 卡片样式 */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 128px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 4px;
+    color: #1a1a1a;
+}
+
+.card-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* 标签页样式 */
+.nav-tabs {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 16px;
+}
+
+.nav-tab {
+    padding: 12px 24px;
+    border: none;
+    background: none;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.nav-tab.active {
+    color: #2196f3;
+    border-bottom-color: #2196f3;
+}
+
+.nav-tab:hover:not(.active) {
+    color: #333;
+    border-bottom-color: #ccc;
+}
+
+/* 分隔线样式 */
+.divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 12px 0;
+}
+
+/* 图标样式 */
+.icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+/* 网格布局 */
+.grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .native-dialog {
+        width: 95vw;
+        margin: 20px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dropdown-menu {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 12px 12px 0 0;
+        margin: 0;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.native-dialog[open] {
+    animation: slideIn 0.2s ease;
+}
+
+.dropdown-menu.show {
+    animation: fadeIn 0.2s ease;
+}
+
+/* 导航栏样式 */
+.navbar .dropdown-toggle {
+    color: #383838 !important;
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.navbar .dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar .dropdown-menu {
+    margin-top: 0px;
+
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 主题选择器样式 */
+.theme-selector {
+    cursor: pointer;
+    padding: 12px 16px;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.theme-selector:hover {
+    background-color: #f5f5f5;
+}
+
+.theme-blue {
+    background-color: #2196f3;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.theme-purple {
+    background-color: #6d50f0;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.theme-black {
+    background-color: #494949;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.blocklyTreeRowSelected .blocklyTreeLabel {
+    background: inherit !important;
+    color: inherit !important;
+    border-radius: inherit !important;
+    padding: 8px 16px !important;
+    font-weight: inherit !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.blocklyTreeRow[style*="A65C81"].blocklyTreeRowSelected .blocklyTreeLabel,
+.blocklyTreeRow[aria-label*="变量"].blocklyTreeRowSelected .blocklyTreeLabel,
+.blocklyTreeRow[aria-label*="Variable"].blocklyTreeRowSelected .blocklyTreeLabel {
+    background: #FEE7C5 !important;
+    color: #2c2c2c !important;
+    border-radius: 8px !important;
+    padding: 16px 40px !important;
+    font-weight: bold !important;
+    box-shadow: 0 2px 8px rgba(254, 231, 197, 0.5) !important;
+    border: 2px solid #E6D3B7 !important;
+}
+
+.blocklyTreeRow[style*="A65C81"].blocklyTreeRowSelected .blocklyTreeLabel:hover,
+.blocklyTreeRow[aria-label*="变量"].blocklyTreeRowSelected .blocklyTreeLabel:hover,
+.blocklyTreeRow[aria-label*="Variable"].blocklyTreeRowSelected .blocklyTreeLabel:hover {
+    background: #F5D9A8 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(245, 217, 168, 0.6) !important;
+}
+
+.blocklyFlyoutButton rect {
+    fill: #FEE7C5 !important;
+    /* stroke: #E6D3B7 !important; */
+    stroke-width: 4 !important;
+    rx: 6 !important;
+    ry: 6 !important;
+    padding: 10px;
+    width: 84%;
+    height: 30px !important;
+    text-align: center
+}
+
+.blocklyText {
+    position: relative !important;
+    top: 5px !important;
+}
+
+/* 自定义工作区按钮容器 */
+.blcokly-action-buttons {
+    position: absolute;
+    right: 30px;
+    width: 56px;
+    padding: 4px 4px;
+    bottom: 28px;
+    background-color: white;
+    z-index: 10000;
+    border-radius: 8px;
+    box-shadow: 0 3px 18px rgba(0, 0, 0, 0.103);
+}
+
+/* 自定义工作区按钮项 */
+.blcokly-action-buttons-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 8px;
+    font-size: 12px;
+    gap: 3px;
+    border-radius: 6px;
+    padding-bottom: 5px;
+    transition: all 0.15s ease;
+    color: #09244B;
+    cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
+    position: relative;
+}
+
+.blcokly-action-buttons-item:hover,
+.blcokly-action-buttons-item.btn-focused {
+    background-color: rgba(233, 231, 231, 0.733);
+    transform: translateY(-1px);
+}
+
+.blcokly-action-buttons-item:active,
+.blcokly-action-buttons-item.btn-pressed,
+.blcokly-action-buttons-item.btn-active {
+    background-color: rgba(200, 200, 200, 0.8);
+    transform: translateY(0);
+}
+
+.blcokly-action-buttons-item.btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.blcokly-action-buttons-item:focus-visible {
+    outline: 2px solid #2196f3;
+    outline-offset: 2px;
+}
+
+.blcokly-action-buttons-item-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blcokly-action-buttons-item-icon svg {
+    fill: #09244B;
+    transition: fill 0.15s ease;
+}
+
+.blcokly-action-buttons-item.btn-disabled .blcokly-action-buttons-item-icon svg {
+    fill: #999;
+}
+
+.blcokly-action-buttons-item-text {
+    font-size: 12px;
+    color: inherit;
+}
+
+/* 响应式设计 */
+.blcokly-action-buttons.mobile-layout {
+    right: 15px;
+    bottom: 15px;
+    width: 48px;
+}
+
+.blcokly-action-buttons.mobile-layout .blcokly-action-buttons-item {
+    padding: 6px;
+    font-size: 10px;
+}
+
+.blcokly-action-buttons.mobile-layout .blcokly-action-buttons-item-icon {
+    width: 14px;
+    height: 14px;
+}
+
+
+/* 隐藏原生Blockly缩放控件 */
+.blocklyZoom {
+    display: none !important;
+}
+
+/* 原生HTML组件样式 - 替换s-组件 */
+
+/* 基础样式重置 */
+* {
+    box-sizing: border-box;
+}
+
+/* 对话框样式 */
+.native-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: hidden;
+    border: none;
+    padding: 0;
+}
+
+.native-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-header {
+    padding: 20px 24px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.dialog-content {
+    padding: 20px 24px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.dialog-actions {
+    padding: 0 24px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* 按钮样式 */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    min-height: 36px;
+}
+
+.btn-primary {
+    background-color: #2196f3;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #1976d2;
+    transform: translateY(-1px);
+}
+
+.btn-outlined {
+    background-color: transparent;
+    color: #2196f3;
+    border: 1px solid #2196f3;
+}
+
+.btn-outlined:hover {
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+.btn-text {
+    background-color: transparent;
+    color: #2196f3;
+    padding: 8px 12px;
+}
+
+.btn-text:hover {
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+/* 文本输入框样式 */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.form-control:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+}
+
+/* 弹出菜单样式 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 180px;
+    padding: 6px 0;
+    margin: 4px 0 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu.show {
+    display: flex;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    gap: 6px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #dad9d9;
+}
+
+.dropdown-item svg {
+    margin-right: 12px;
+    width: 18px;
+    fill: currentColor;
+    height: 18px;
+    position: relative;
+    top: 0.75px;
+}
+
+/* 卡片样式 */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 128px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 4px;
+    color: #1a1a1a;
+}
+
+.card-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* 标签页样式 */
+.nav-tabs {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 16px;
+}
+
+.nav-tab {
+    padding: 12px 24px;
+    border: none;
+    background: none;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.nav-tab.active {
+    color: #2196f3;
+    border-bottom-color: #2196f3;
+}
+
+.nav-tab:hover:not(.active) {
+    color: #333;
+    border-bottom-color: #ccc;
+}
+
+/* 分隔线样式 */
+.divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 12px 0;
+}
+
+/* 图标样式 */
+.icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+/* 网格布局 */
+.grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .native-dialog {
+        width: 95vw;
+        margin: 20px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dropdown-menu {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 12px 12px 0 0;
+        margin: 0;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.native-dialog[open] {
+    animation: slideIn 0.2s ease;
+}
+
+.dropdown-menu.show {
+    animation: fadeIn 0.2s ease;
+}
+
+/* 导航栏样式 */
+.navbar .dropdown-toggle {
+    color: #383838 !important;
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.navbar .dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar .dropdown-menu {
+    margin-top: 0px;
+
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 主题选择器样式 */
+.theme-selector {
+    cursor: pointer;
+    padding: 12px 16px;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.theme-selector:hover {
+    background-color: #f5f5f5;
+}
+
+.theme-blue {
+    background-color: #2196f3;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.theme-purple {
+    background-color: #6d50f0;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.theme-black {
+    background-color: #494949;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.blocklyTreeRowSelected .blocklyTreeLabel {
+    background: inherit !important;
+    color: inherit !important;
+    border-radius: inherit !important;
+    padding: 8px 16px !important;
+    font-weight: inherit !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.blocklyTreeRow[style*="A65C81"].blocklyTreeRowSelected .blocklyTreeLabel,
+.blocklyTreeRow[aria-label*="变量"].blocklyTreeRowSelected .blocklyTreeLabel,
+.blocklyTreeRow[aria-label*="Variable"].blocklyTreeRowSelected .blocklyTreeLabel {
+    background: #FEE7C5 !important;
+    color: #2c2c2c !important;
+    border-radius: 8px !important;
+    padding: 16px 40px !important;
+    font-weight: bold !important;
+    box-shadow: 0 2px 8px rgba(254, 231, 197, 0.5) !important;
+    border: 2px solid #E6D3B7 !important;
+}
+
+.blocklyTreeRow[style*="A65C81"].blocklyTreeRowSelected .blocklyTreeLabel:hover,
+.blocklyTreeRow[aria-label*="变量"].blocklyTreeRowSelected .blocklyTreeLabel:hover,
+.blocklyTreeRow[aria-label*="Variable"].blocklyTreeRowSelected .blocklyTreeLabel:hover {
+    background: #F5D9A8 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(245, 217, 168, 0.6) !important;
+}
+
+.blocklyFlyoutButton rect {
+    fill: #FEE7C5 !important;
+    /* stroke: #E6D3B7 !important; */
+    stroke-width: 4 !important;
+    rx: 6 !important;
+    ry: 6 !important;
+    padding: 10px;
+    width: 84%;
+    height: 30px !important;
+    text-align: center
+}
+
+.blocklyText {
+    position: relative !important;
+    top: 5px !important;
+}
+
+/* 自定义工作区按钮容器 */
+.blcokly-action-buttons {
+    position: absolute;
+    right: 30px;
+    width: 56px;
+    padding: 4px 4px;
+    bottom: 28px;
+    background-color: white;
+    z-index: 10000;
+    border-radius: 8px;
+    box-shadow: 0 3px 18px rgba(0, 0, 0, 0.103);
+}
+
+/* 自定义工作区按钮项 */
+.blcokly-action-buttons-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 8px;
+    font-size: 12px;
+    gap: 3px;
+    border-radius: 6px;
+    padding-bottom: 5px;
+    transition: all 0.15s ease;
+    color: #09244B;
+    cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
+    position: relative;
+}
+
+.blcokly-action-buttons-item:hover,
+.blcokly-action-buttons-item.btn-focused {
+    background-color: rgba(233, 231, 231, 0.733);
+    transform: translateY(-1px);
+}
+
+.blcokly-action-buttons-item:active,
+.blcokly-action-buttons-item.btn-pressed,
+.blcokly-action-buttons-item.btn-active {
+    background-color: rgba(200, 200, 200, 0.8);
+    transform: translateY(0);
+}
+
+.blcokly-action-buttons-item.btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.blcokly-action-buttons-item:focus-visible {
+    outline: 2px solid #2196f3;
+    outline-offset: 2px;
+}
+
+.blcokly-action-buttons-item-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blcokly-action-buttons-item-icon svg {
+    fill: #09244B;
+    transition: fill 0.15s ease;
+}
+
+.blcokly-action-buttons-item.btn-disabled .blcokly-action-buttons-item-icon svg {
+    fill: #999;
+}
+
+.blcokly-action-buttons-item-text {
+    font-size: 12px;
+    color: inherit;
+}
+
+/* 响应式设计 */
+.blcokly-action-buttons.mobile-layout {
+    right: 15px;
+    bottom: 15px;
+    width: 48px;
+}
+
+.blcokly-action-buttons.mobile-layout .blcokly-action-buttons-item {
+    padding: 6px;
+    font-size: 10px;
+}
+
+.blcokly-action-buttons.mobile-layout .blcokly-action-buttons-item-icon {
+    width: 14px;
+    height: 14px;
+}
+
+
+/* 隐藏原生Blockly缩放控件 */
+.blocklyZoom {
+    display: none !important;
+}
+
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+    .blcokly-action-buttons-item {
+        border: 1px solid #09244B;
+    }
+
+    .blcokly-action-buttons-item:hover,
+    .blcokly-action-buttons-item.btn-focused {
+        background-color: #09244B;
+        color: white;
+    }
+
+    .blcokly-action-buttons-item:hover .blcokly-action-buttons-item-icon svg,
+    .blcokly-action-buttons-item.btn-focused .blcokly-action-buttons-item-icon svg {
+        fill: white;
+    }
+}
+
+/* 减少动画模式支持 */
+@media (prefers-reduced-motion: reduce) {
+
+    .blcokly-action-buttons-item,
+    .blcokly-action-buttons-item-icon svg,
+    .workspace-toast {
+        transition: none;
+    }
+}
+
+/* Blockly工具箱飞出面板动画 */
+.blocklyFlyout {
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+}
+
+/* 展开状态 */
+.blocklyFlyout[style*="display: block"],
+.blocklyFlyout:not([style*="display: none"]) {
+    animation: flyoutSlideIn 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) forwards !important;
+}
+
+/* 收起状态 */
+.blocklyFlyout[style*="display: none"] {
+    animation: flyoutSlideOut 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) forwards !important;
+}
+
+/* 滑入动画关键帧 */
+@keyframes flyoutSlideIn {
+    0% {
+        transform: translateX(-100%) !important;
+        opacity: 0 !important;
+    }
+
+    50% {
+        opacity: 0.7 !important;
+    }
+
+    100% {
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+    }
+}
+
+/* 滑出动画关键帧 */
+@keyframes flyoutSlideOut {
+    0% {
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+    }
+
+    50% {
+        opacity: 0.7 !important;
+    }
+
+    100% {
+        transform: translateX(-100%) !important;
+        opacity: 0 !important;
+    }
+}
+
+
+/* 响应式动画调整 */
+@media (max-width: 768px) {
+    .blocklyFlyoutBackground {
+        transition: all 0.25s ease !important;
+    }
+
+    /* 移动端使用从上方滑入的动画 */
+    @keyframes flyoutSlideIn {
+        0% {
+            transform: translateY(-100%) !important;
+            opacity: 0 !important;
+        }
+
+        50% {
+            opacity: 0.7 !important;
+        }
+
+        100% {
+            transform: translateY(0) !important;
+            opacity: 1 !important;
+        }
+    }
+
+    @keyframes flyoutSlideOut {
+        0% {
+            transform: translateY(0) !important;
+            opacity: 1 !important;
+        }
+
+        50% {
+            opacity: 0.7 !important;
+        }
+
+        100% {
+            transform: translateY(-100%) !important;
+            opacity: 0 !important;
+        }
+    }
+}
+
+/* 减少动画模式下禁用工具箱动画 */
+@media (prefers-reduced-motion: reduce) {
+    .blocklyFlyout {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+.blocklyWidgetDiv .blocklyMenu {
+    background: #fff;
+    border: 1px solid transparent;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.164) !important;
+    font: normal 13px Arial, sans-serif;
+    margin: 0;
+    width: 200px;
+    outline: none;
+    padding: 7px 5px;
+    position: absolute;
+    overflow: hidden;
+    z-index: 20000;
+}
+
+.blocklyMenuItem {
+    padding: 6px 12px;
+}
+
+.blocklyDropDownDiv {
+
+    background: #fff !important;
+    border: 1px solid transparent !important;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.164) !important;
+    font: normal 13px Arial, sans-serif;
+    margin: 0;
+    width: 200px;
+    color: #2c2c2c !important;
+    outline: none;
+    padding: 7px 6px;
+    padding-right: 7px;
+    position: absolute;
+    overflow: hidden;
+    z-index: 20000;
+    border-radius: 8px;
+}
+
+.codemao-renderer.zelos-theme.blocklyDropDownDiv .goog-menuitem-content {
+    color: #2c2c2c !important;
+}
+
+
+.blocklyDropdownMenu .blocklyMenuItem {
+    /* padding-left: 28px; */
+}
+
+.goog-menuitem {
+    border-radius: 7px;
+    transition: all 0.15s ease;
+}
+
+.blocklyArrowTop {
+    display: none;
+}
+
+
+.blocklyMenuItemSelected .blocklyMenuItemCheckbox {
+    background: url(../media/check_line.svg) no-repeat 2px 1.5px;
+    background-size: 90%;
+    float: left;
+    margin-left: -24px;
+    position: static;
+}
+.goog-menuitem-highlight {
+    background-color: #f0f0f0;
+}
+
+.blocklyContextMenu {
+    border-radius: 10px;
+}
+
+/* 原生HTML组件样式 - 替换s-组件 */
+
+/* 基础样式重置 */
+* {
+    box-sizing: border-box;
+}
+
+/* 对话框样式 */
+.native-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: hidden;
+    border: none;
+    padding: 0;
+}
+
+.native-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-header {
+    padding: 20px 24px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.dialog-content {
+    padding: 20px 24px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.dialog-actions {
+    padding: 0 24px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* 按钮样式 */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    min-height: 36px;
+}
+
+.btn-primary {
+    background-color: #2196f3;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #1976d2;
+    transform: translateY(-1px);
+}
+
+.btn-outlined {
+    background-color: transparent;
+    color: #2196f3;
+    border: 1px solid #2196f3;
+}
+
+.btn-outlined:hover {
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+.btn-text {
+    background-color: transparent;
+    color: #2196f3;
+    padding: 8px 12px;
+}
+
+.btn-text:hover {
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+/* 文本输入框样式 */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.form-control:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+}
+
+/* 弹出菜单样式 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 180px;
+    padding: 6px 0;
+    margin: 4px 0 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu.show {
+    display: flex;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    gap: 6px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #dad9d9;
+}
+
+.dropdown-item svg {
+    margin-right: 12px;
+    width: 18px;
+    fill: currentColor;
+    height: 18px;
+    position: relative;
+    top: 0.75px;
+}
+
+/* 卡片样式 */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 128px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 4px;
+    color: #1a1a1a;
+}
+
+.card-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* 标签页样式 */
+.nav-tabs {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 16px;
+}
+
+.nav-tab {
+    padding: 12px 24px;
+    border: none;
+    background: none;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.nav-tab.active {
+    color: #2196f3;
+    border-bottom-color: #2196f3;
+}
+
+.nav-tab:hover:not(.active) {
+    color: #333;
+    border-bottom-color: #ccc;
+}
+
+/* 分隔线样式 */
+.divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 12px 0;
+}
+
+/* 图标样式 */
+.icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+/* 网格布局 */
+.grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .native-dialog {
+        width: 95vw;
+        margin: 20px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dropdown-menu {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 12px 12px 0 0;
+        margin: 0;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.native-dialog[open] {
+    animation: slideIn 0.2s ease;
+}
+
+.dropdown-menu.show {
+    animation: fadeIn 0.2s ease;
+}
+
+/* 导航栏样式 */
+.navbar .dropdown-toggle {
+    color: #383838 !important;
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.navbar .dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar .dropdown-menu {
+    margin-top: 0px;
+
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 主题选择器样式 */
+.theme-selector {
+    cursor: pointer;
+    padding: 12px 16px;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.theme-selector:hover {
+    background-color: #f5f5f5;
+}
+
+.theme-blue {
+    background-color: #2196f3;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.theme-purple {
+    background-color: #6d50f0;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.theme-black {
+    background-color: #494949;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.blocklyTreeRowSelected .blocklyTreeLabel {
+    background: inherit !important;
+    color: inherit !important;
+    border-radius: inherit !important;
+    padding: 8px 16px !important;
+    font-weight: inherit !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.blocklyTreeRow[style*="A65C81"].blocklyTreeRowSelected .blocklyTreeLabel,
+.blocklyTreeRow[aria-label*="变量"].blocklyTreeRowSelected .blocklyTreeLabel,
+.blocklyTreeRow[aria-label*="Variable"].blocklyTreeRowSelected .blocklyTreeLabel {
+    background: #FEE7C5 !important;
+    color: #2c2c2c !important;
+    border-radius: 8px !important;
+    padding: 16px 40px !important;
+    font-weight: bold !important;
+    box-shadow: 0 2px 8px rgba(254, 231, 197, 0.5) !important;
+    border: 2px solid #E6D3B7 !important;
+}
+
+.blocklyTreeRow[style*="A65C81"].blocklyTreeRowSelected .blocklyTreeLabel:hover,
+.blocklyTreeRow[aria-label*="变量"].blocklyTreeRowSelected .blocklyTreeLabel:hover,
+.blocklyTreeRow[aria-label*="Variable"].blocklyTreeRowSelected .blocklyTreeLabel:hover {
+    background: #F5D9A8 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(245, 217, 168, 0.6) !important;
+}
+
+.blocklyFlyoutButton rect {
+    fill: #FEE7C5 !important;
+    /* stroke: #E6D3B7 !important; */
+    stroke-width: 4 !important;
+    rx: 6 !important;
+    ry: 6 !important;
+    padding: 10px;
+    width: 84%;
+    height: 30px !important;
+    text-align: center
+}
+
+.blocklyText {
+    position: relative !important;
+    top: 5px !important;
+}
+
+/* 自定义工作区按钮容器 */
+.blcokly-action-buttons {
+    position: absolute;
+    right: 30px;
+    width: 56px;
+    padding: 4px 4px;
+    bottom: 28px;
+    background-color: white;
+    z-index: 10000;
+    border-radius: 8px;
+    box-shadow: 0 3px 18px rgba(0, 0, 0, 0.103);
+}
+
+/* 自定义工作区按钮项 */
+.blcokly-action-buttons-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 8px;
+    font-size: 12px;
+    gap: 3px;
+    border-radius: 6px;
+    padding-bottom: 5px;
+    transition: all 0.15s ease;
+    color: #09244B;
+    cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
+    position: relative;
+}
+
+.blcokly-action-buttons-item:hover,
+.blcokly-action-buttons-item.btn-focused {
+    background-color: rgba(233, 231, 231, 0.733);
+    transform: translateY(-1px);
+}
+
+.blcokly-action-buttons-item:active,
+.blcokly-action-buttons-item.btn-pressed,
+.blcokly-action-buttons-item.btn-active {
+    background-color: rgba(200, 200, 200, 0.8);
+    transform: translateY(0);
+}
+
+.blcokly-action-buttons-item.btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.blcokly-action-buttons-item:focus-visible {
+    outline: 2px solid #2196f3;
+    outline-offset: 2px;
+}
+
+.blcokly-action-buttons-item-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blcokly-action-buttons-item-icon svg {
+    fill: #09244B;
+    transition: fill 0.15s ease;
+}
+
+.blcokly-action-buttons-item.btn-disabled .blcokly-action-buttons-item-icon svg {
+    fill: #999;
+}
+
+.blcokly-action-buttons-item-text {
+    font-size: 12px;
+    color: inherit;
+}
+
+/* 响应式设计 */
+.blcokly-action-buttons.mobile-layout {
+    right: 15px;
+    bottom: 15px;
+    width: 48px;
+}
+
+.blcokly-action-buttons.mobile-layout .blcokly-action-buttons-item {
+    padding: 6px;
+    font-size: 10px;
+}
+
+.blcokly-action-buttons.mobile-layout .blcokly-action-buttons-item-icon {
+    width: 14px;
+    height: 14px;
+}
+
+
+/* 隐藏原生Blockly缩放控件 */
+.blocklyZoom {
+    display: none !important;
+}
+
+/* 原生HTML组件样式 - 替换s-组件 */
+
+/* 基础样式重置 */
+* {
+    box-sizing: border-box;
+}
+
+/* 对话框样式 */
+.native-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: hidden;
+    border: none;
+    padding: 0;
+}
+
+.native-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-header {
+    padding: 20px 24px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.dialog-content {
+    padding: 20px 24px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.dialog-actions {
+    padding: 0 24px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* 按钮样式 */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    min-height: 36px;
+}
+
+.btn-primary {
+    background-color: #2196f3;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #1976d2;
+    transform: translateY(-1px);
+}
+
+.btn-outlined {
+    background-color: transparent;
+    color: #2196f3;
+    border: 1px solid #2196f3;
+}
+
+.btn-outlined:hover {
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+.btn-text {
+    background-color: transparent;
+    color: #2196f3;
+    padding: 8px 12px;
+}
+
+.btn-text:hover {
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+/* 文本输入框样式 */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.form-control:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+}
+
+/* 弹出菜单样式 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 180px;
+    padding: 6px 0;
+    margin: 4px 0 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu.show {
+    display: flex;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    gap: 6px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #dad9d9;
+}
+
+.dropdown-item svg {
+    margin-right: 12px;
+    width: 18px;
+    fill: currentColor;
+    height: 18px;
+    position: relative;
+    top: 0.75px;
+}
+
+/* 卡片样式 */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 128px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 4px;
+    color: #1a1a1a;
+}
+
+.card-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* 标签页样式 */
+.nav-tabs {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 16px;
+}
+
+.nav-tab {
+    padding: 12px 24px;
+    border: none;
+    background: none;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.nav-tab.active {
+    color: #2196f3;
+    border-bottom-color: #2196f3;
+}
+
+.nav-tab:hover:not(.active) {
+    color: #333;
+    border-bottom-color: #ccc;
+}
+
+/* 分隔线样式 */
+.divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 12px 0;
+}
+
+/* 图标样式 */
+.icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+/* 网格布局 */
+.grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .native-dialog {
+        width: 95vw;
+        margin: 20px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dropdown-menu {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 12px 12px 0 0;
+        margin: 0;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.native-dialog[open] {
+    animation: slideIn 0.2s ease;
+}
+
+.dropdown-menu.show {
+    animation: fadeIn 0.2s ease;
+}
+
+/* 导航栏样式 */
+.navbar .dropdown-toggle {
+    color: #383838 !important;
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.navbar .dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar .dropdown-menu {
+    margin-top: 0px;
+
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 主题选择器样式 */
+.theme-selector {
+    cursor: pointer;
+    padding: 12px 16px;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.theme-selector:hover {
+    background-color: #f5f5f5;
+}
+
+.theme-blue {
+    background-color: #2196f3;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.theme-purple {
+    background-color: #6d50f0;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.theme-black {
+    background-color: #494949;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.blocklyTreeRowSelected .blocklyTreeLabel {
+    background: inherit !important;
+    color: inherit !important;
+    border-radius: inherit !important;
+    padding: 8px 16px !important;
+    font-weight: inherit !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.blocklyTreeRow[style*="A65C81"].blocklyTreeRowSelected .blocklyTreeLabel,
+.blocklyTreeRow[aria-label*="变量"].blocklyTreeRowSelected .blocklyTreeLabel,
+.blocklyTreeRow[aria-label*="Variable"].blocklyTreeRowSelected .blocklyTreeLabel {
+    background: #FEE7C5 !important;
+    color: #2c2c2c !important;
+    border-radius: 8px !important;
+    padding: 16px 40px !important;
+    font-weight: bold !important;
+    box-shadow: 0 2px 8px rgba(254, 231, 197, 0.5) !important;
+    border: 2px solid #E6D3B7 !important;
+}
+
+.blocklyTreeRow[style*="A65C81"].blocklyTreeRowSelected .blocklyTreeLabel:hover,
+.blocklyTreeRow[aria-label*="变量"].blocklyTreeRowSelected .blocklyTreeLabel:hover,
+.blocklyTreeRow[aria-label*="Variable"].blocklyTreeRowSelected .blocklyTreeLabel:hover {
+    background: #F5D9A8 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(245, 217, 168, 0.6) !important;
+}
+
+.blocklyFlyoutButton rect {
+    fill: #FEE7C5 !important;
+    /* stroke: #E6D3B7 !important; */
+    stroke-width: 4 !important;
+    rx: 6 !important;
+    ry: 6 !important;
+    padding: 10px;
+    width: 84%;
+    height: 30px !important;
+    text-align: center
+}
+
+.blocklyText {
+    position: relative !important;
+    top: 5px !important;
+}
+
+/* 自定义工作区按钮容器 */
+.blcokly-action-buttons {
+    position: absolute;
+    right: 30px;
+    width: 56px;
+    padding: 4px 4px;
+    bottom: 28px;
+    background-color: white;
+    z-index: 10000;
+    border-radius: 8px;
+    box-shadow: 0 3px 18px rgba(0, 0, 0, 0.103);
+}
+
+/* 自定义工作区按钮项 */
+.blcokly-action-buttons-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 8px;
+    font-size: 12px;
+    gap: 3px;
+    border-radius: 6px;
+    padding-bottom: 5px;
+    transition: all 0.15s ease;
+    color: #09244B;
+    cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
+    position: relative;
+}
+
+.blcokly-action-buttons-item:hover,
+.blcokly-action-buttons-item.btn-focused {
+    background-color: rgba(233, 231, 231, 0.733);
+    transform: translateY(-1px);
+}
+
+.blcokly-action-buttons-item:active,
+.blcokly-action-buttons-item.btn-pressed,
+.blcokly-action-buttons-item.btn-active {
+    background-color: rgba(200, 200, 200, 0.8);
+    transform: translateY(0);
+}
+
+.blcokly-action-buttons-item.btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.blcokly-action-buttons-item:focus-visible {
+    outline: 2px solid #2196f3;
+    outline-offset: 2px;
+}
+
+.blcokly-action-buttons-item-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blcokly-action-buttons-item-icon svg {
+    fill: #09244B;
+    transition: fill 0.15s ease;
+}
+
+.blcokly-action-buttons-item.btn-disabled .blcokly-action-buttons-item-icon svg {
+    fill: #999;
+}
+
+.blcokly-action-buttons-item-text {
+    font-size: 12px;
+    color: inherit;
+}
+
+/* 响应式设计 */
+.blcokly-action-buttons.mobile-layout {
+    right: 15px;
+    bottom: 15px;
+    width: 48px;
+}
+
+.blcokly-action-buttons.mobile-layout .blcokly-action-buttons-item {
+    padding: 6px;
+    font-size: 10px;
+}
+
+.blcokly-action-buttons.mobile-layout .blcokly-action-buttons-item-icon {
+    width: 14px;
+    height: 14px;
+}
+
+
+/* 隐藏原生Blockly缩放控件 */
+.blocklyZoom {
+    display: none !important;
+}
+
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+    .blcokly-action-buttons-item {
+        border: 1px solid #09244B;
+    }
+
+    .blcokly-action-buttons-item:hover,
+    .blcokly-action-buttons-item.btn-focused {
+        background-color: #09244B;
+        color: white;
+    }
+
+    .blcokly-action-buttons-item:hover .blcokly-action-buttons-item-icon svg,
+    .blcokly-action-buttons-item.btn-focused .blcokly-action-buttons-item-icon svg {
+        fill: white;
+    }
+}
+
+
+.blocklyFlyoutButton text {
+    fill: #2c2c2c !important;
+    font-weight: bold !important;
+    position: relative !important;
+    top: 5px !important;
+    text-align: center;
+    transform: translateX(15%) translateY(4.5px);
+}
+
+.blocklyFlyoutButton:hover rect {
+    fill: #F5D9A8 !important;
+}
+
+.complete-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.complete-modal-content {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    padding-top: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    min-width: 400px;
+    max-width: 90vw;
+    transform: scale(0.9);
+    animation: scaleIn 0.3s ease forwards;
+}
+
+@keyframes scaleIn {
+    to {
+        transform: scale(1);
+    }
+}
+
+.complete-modal h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: start;
+}
+
+.complete-modal input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.complete-modal input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.complete-modal .buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.complete-modal button {
+    padding: 6px 22px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    flex: 1;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    min-width: 140px;
+}
+
+.complete-modal .btn-cancel {
+    background: #eff0f1;
+    color: #6c757d;
+}
+
+.complete-modal .btn-cancel:hover {
+    background: #e9ecef;
+    color: #495057;
+    filter: brightness(0.95);
+}
+
+.complete-modal .btn-create {
+    background: #FEE7C5;
+    color: #2c2c2c;
+}
+
+.complete-modal .btn-create:hover {
+    background: #F5D9A8;
+    filter: brightness(0.98);
+    box-shadow: 0 8px 25px rgba(254, 231, 197, 0.4);
+}
+
+.complete-modal .btn-create:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
 }
 
 @font-face {

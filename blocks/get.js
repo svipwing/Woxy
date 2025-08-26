@@ -10,7 +10,7 @@ function fieldDropdown(options, def) {
 
 Blockly.Blocks['go'] = {
   init: function () {
-    this.setColour(200);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("页面开始")
       .appendField("标题")
@@ -30,7 +30,7 @@ Blockly.Blocks['go'] = {
 
 Blockly.Blocks['end'] = {
   init: function () {
-    this.setColour(200);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("页面结束");
     this.setTooltip("生成 </body></html> 结束标签");
@@ -42,7 +42,7 @@ Blockly.Blocks['end'] = {
 function defineHeading(type, label) {
   Blockly.Blocks[type] = {
     init: function () {
-      this.setColour(20);
+      this.setColour('#28A370');
       this.appendDummyInput()
         .appendField(label)
         .appendField("文本")
@@ -61,7 +61,7 @@ defineHeading("h3", "三级标题");
 
 Blockly.Blocks['p'] = {
   init: function () {
-    this.setColour(20);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("段落")
       .appendField("文本")
@@ -76,7 +76,7 @@ Blockly.Blocks['p'] = {
 
 Blockly.Blocks['p_xy'] = {
   init: function () {
-    this.setColour(20);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("段落(定位)")
       .appendField("文本")
@@ -94,7 +94,7 @@ Blockly.Blocks['p_xy'] = {
 
 Blockly.Blocks['div'] = {
   init: function () {
-    this.setColour(60);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("容器")
       .appendField("id")
@@ -112,7 +112,7 @@ Blockly.Blocks['div'] = {
 
 Blockly.Blocks['div_xy'] = {
   init: function () {
-    this.setColour(60);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("容器(定位)")
       .appendField("id")
@@ -134,7 +134,7 @@ Blockly.Blocks['div_xy'] = {
 function defineInlineTag(type, label, tag) {
   Blockly.Blocks[type] = {
     init: function () {
-      this.setColour(20);
+        this.setColour('#5C69C7');
       this.appendDummyInput()
         .appendField(label)
         .appendField("文本")
@@ -148,7 +148,7 @@ function defineInlineTag(type, label, tag) {
   };
   Blockly.Blocks[type + "_xy"] = {
     init: function () {
-      this.setColour(20);
+      this.setColour('#28A370');
       this.appendDummyInput()
         .appendField(label + "(定位)")
         .appendField("文本")
@@ -170,7 +170,7 @@ defineInlineTag("s", "删除线", "s");
 
 Blockly.Blocks['table'] = {
   init: function () {
-    this.setColour(160);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("表格")
       .appendField("id")
@@ -186,7 +186,7 @@ Blockly.Blocks['table'] = {
 
 Blockly.Blocks['table_xy'] = {
   init: function () {
-    this.setColour(160);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("表格(定位)")
       .appendField("id")
@@ -205,7 +205,7 @@ Blockly.Blocks['table_xy'] = {
 
 Blockly.Blocks['tr_head'] = {
   init: function () {
-    this.setColour(160);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("表头行")
       .appendField("id")
@@ -221,7 +221,7 @@ Blockly.Blocks['tr_head'] = {
 
 Blockly.Blocks['tr'] = {
   init: function () {
-    this.setColour(160);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("表体行")
       .appendField("id")
@@ -237,7 +237,7 @@ Blockly.Blocks['tr'] = {
 
 Blockly.Blocks['th'] = {
   init: function () {
-    this.setColour(160);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("表头")
       .appendField("文本")
@@ -251,7 +251,7 @@ Blockly.Blocks['th'] = {
 
 Blockly.Blocks['td'] = {
   init: function () {
-    this.setColour(160);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("单元格")
       .appendField("文本")
@@ -265,7 +265,7 @@ Blockly.Blocks['td'] = {
 
 Blockly.Blocks['ul'] = {
   init: function () {
-    this.setColour(100);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("无序列表")
       .appendField("id")
@@ -280,7 +280,7 @@ Blockly.Blocks['ul'] = {
 
 Blockly.Blocks['ul_xy'] = {
   init: function () {
-    this.setColour(100);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("无序列表(定位)")
       .appendField("id")
@@ -298,7 +298,7 @@ Blockly.Blocks['ul_xy'] = {
 
 Blockly.Blocks['ol'] = {
   init: function () {
-    this.setColour(100);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("有序列表")
       .appendField("id")
@@ -313,7 +313,7 @@ Blockly.Blocks['ol'] = {
 
 Blockly.Blocks['ol_xy'] = {
   init: function () {
-    this.setColour(100);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("有序列表(定位)")
       .appendField("id")
@@ -331,7 +331,7 @@ Blockly.Blocks['ol_xy'] = {
 
 Blockly.Blocks['li'] = {
   init: function () {
-    this.setColour(100);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("列表项")
       .appendField("文本")
@@ -345,7 +345,7 @@ Blockly.Blocks['li'] = {
 
 Blockly.Blocks['link'] = {
   init: function () {
-    this.setColour(260);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("超链接")
       .appendField("文本")
@@ -361,7 +361,7 @@ Blockly.Blocks['link'] = {
 
 Blockly.Blocks['link_xy'] = {
   init: function () {
-    this.setColour(260);
+    this.setColour('#28A370');
     this.appendDummyInput()
       .appendField("超链接(定位)")
       .appendField("文本")
@@ -380,7 +380,7 @@ Blockly.Blocks['link_xy'] = {
 
 Blockly.Blocks['image'] = {
   init: function () {
-    this.setColour(15);
+    this.setColour('#e67e22');
     this.appendDummyInput()
       .appendField("图片")
       .appendField("链接")
@@ -419,7 +419,7 @@ Blockly.Blocks['image_xy'] = {
 
 Blockly.Blocks['button'] = {
   init: function () {
-    this.setColour(300);
+    this.setColour('#e74c3c');
     this.appendDummyInput()
       .appendField("按钮")
       .appendField("文本")
@@ -587,7 +587,7 @@ Blockly.Blocks['menu_item'] = {
 
 Blockly.Blocks['style'] = {
   init: function () {
-    this.setColour(330);
+    this.setColour('#8e44ad');
     this.appendDummyInput()
       .appendField("样式 #id")
       .appendField(new Blockly.FieldTextInput("a"), "who");
@@ -819,7 +819,7 @@ Blockly.Blocks['position'] = {
 
 Blockly.Blocks['js'] = {
   init: function () {
-    this.setColour(120);
+    this.setColour('#2ecc71');
     this.appendDummyInput().appendField("脚本");
     this.appendStatementInput("js").setCheck(null).appendField("代码");
     this.setPreviousStatement(true);
@@ -828,7 +828,7 @@ Blockly.Blocks['js'] = {
 };
 Blockly.Blocks['alert'] = {
   init: function () {
-    this.setColour(120);
+    this.setColour('#28A370');
     this.appendValueInput("text").setCheck(null).appendField("弹窗");
     this.setPreviousStatement(true);
     this.setNextStatement(true);

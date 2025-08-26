@@ -1,0 +1,320 @@
+/* 多页面系统样式 */
+
+/* 页面容器 */
+.page-container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* 页面切换动画 */
+.page-container.page-enter {
+    opacity: 0;
+    transform: translateX(20px);
+    animation: pageEnter 0.3s ease forwards;
+}
+
+@keyframes pageEnter {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 加载指示器 */
+.page-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.loading-spinner {
+    text-align: center;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #2196f3;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 16px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* 页面内加载覆盖层 */
+.page-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.loading-content {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 错误显示 */
+.page-error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+}
+
+.error-content {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    max-width: 400px;
+}
+
+.error-content h3 {
+    color: #e74c3c;
+    margin: 0 0 12px 0;
+    font-size: 18px;
+}
+
+.error-content p {
+    color: #666;
+    margin: 0 0 16px 0;
+    line-height: 1.5;
+}
+
+.error-content button {
+    background: #2196f3;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.error-content button:hover {
+    background: #1976d2;
+}
+
+/* 导航栏样式 */
+.page-navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-brand {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    margin-right: 40px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+}
+
+.nav-link {
+    color: #666;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.nav-link:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.nav-link.active {
+    background: #2196f3;
+    color: white;
+}
+
+.nav-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* 页面内容区域 */
+.page-content {
+    padding-top: 60px; /* 为导航栏留出空间 */
+    height: 100vh;
+    overflow: auto;
+}
+
+/* 侧边栏样式 */
+.page-sidebar {
+    position: fixed;
+    left: 0;
+    top: 60px;
+    width: 250px;
+    height: calc(100vh - 60px);
+    background: #f8f9fa;
+    border-right: 1px solid #e0e0e0;
+    overflow-y: auto;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.page-sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-section {
+    padding: 16px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.sidebar-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sidebar-item {
+    display: block;
+    padding: 8px 12px;
+    color: #666;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.sidebar-item:hover {
+    background: #e9ecef;
+    color: #333;
+}
+
+.sidebar-item.active {
+    background: #2196f3;
+    color: white;
+}
+
+/* 主内容区域（有侧边栏时） */
+.page-main {
+    margin-left: 0;
+    transition: margin-left 0.3s ease;
+}
+
+.page-main.with-sidebar {
+    margin-left: 250px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .page-navigation {
+        padding: 0 16px;
+    }
+    
+    .nav-brand {
+        font-size: 18px;
+        margin-right: 20px;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .page-sidebar {
+        width: 280px;
+    }
+    
+    .page-main.with-sidebar {
+        margin-left: 0;
+    }
+}
+
+/* 工具提示 */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 页面特定样式隔离 */
+.page-container[data-page="blockly-editor"] {
+    /* Blockly编辑器页面特定样式 */
+}
+
+.page-container[data-page="project-manager"] {
+    /* 项目管理页面特定样式 */
+}
+
+.page-container[data-page="settings"] {
+    /* 设置页面特定样式 */
+}

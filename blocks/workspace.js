@@ -1,11 +1,14 @@
-const theme1 = Blockly.Theme.defineTheme('dark', {
-    base: Blockly.Themes.Zelos,
-    componentStyles: {
-        workspaceBackgroundColour: "#1f1f1f",
-        toolboxBackgroundColour: "#c2c2c2"
-    },
-    name: "dark"
-});
+// 检查是否已经定义主题，避免重复声明
+if (!window.theme1) {
+    window.theme1 = Blockly.Theme.defineTheme('dark', {
+        base: Blockly.Themes.Zelos,
+        componentStyles: {
+            workspaceBackgroundColour: "#1f1f1f",
+            toolboxBackgroundColour: "#c2c2c2"
+        },
+        name: "dark"
+    });
+}
 
 if($.cookie("theme")=="#494949"){
     themename = "dark";
