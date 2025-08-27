@@ -75,14 +75,23 @@ async function myUpdateFunction(_event) {
         plugins: prettierPlugins,
     })
 
-    document.getElementById("code").textContent = code;
+    document.getElementById("code-content").textContent = code;
 
     if(lastcode != code.replace("\n","").replace(/(\n|\r|\r\n|↵)/g, '')){
         document.getElementById("look_html").srcdoc = code;
         lastcode = code.replace("\n","").replace(/(\n|\r|\r\n|↵)/g, '');
     }
 
-    Prism.highlightAll();
+    // 确保语法高亮和行号正确应用
+    setTimeout(() => {
+        if (typeof Prism !== 'undefined') {
+            Prism.highlightAll();
+            // 重新初始化行号
+            if (Prism.plugins.lineNumbers) {
+                Prism.plugins.lineNumbers.resize();
+            }
+        }
+    }, 100);
 }
 
 workspace.addChangeListener(myUpdateFunction);

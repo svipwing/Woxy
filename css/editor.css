@@ -124,7 +124,7 @@
 }
 
 .navbar b {
-   color: #383838 !important;
+
     font-weight: 600;
 }
 
@@ -254,6 +254,44 @@
     z-index: 999;
     font-family: consola, serif;
     display: inline;
+}
+
+/* 行号样式优化 */
+#code pre.line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+#code pre.line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+#code .line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em;
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+    user-select: none;
+}
+
+#code .line-numbers-rows > span {
+    pointer-events: none;
+    display: block;
+    counter-increment: linenumber;
+}
+
+#code .line-numbers-rows > span:before {
+    content: counter(linenumber);
+    color: #999;
+    display: block;
+    padding-right: 0.8em;
+    text-align: right;
 }
 
 #codefa {

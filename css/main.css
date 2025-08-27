@@ -26,10 +26,10 @@ body {
     position: fixed;
     top: 0;
     height: 60px;
-    background-color: #ffffff !important;
+    background-color: #ffffff;
     box-sizing: border-box;
-    z-index: 100;
-    color: #383838 !important;
+    z-index: 99999999999999999999999;
+    color: #383838;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -371,13 +371,19 @@ iconpark-icon {
     z-index: 99999;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    padding-top: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    animation: scaleIn 0.3s ease forwards;
 }
 
 #g-apk-child {
     border-radius: 10px;
     position: fixed;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0);
     padding: 30px;
     width: 40%;
     height: 45%;
@@ -407,14 +413,13 @@ iconpark-icon {
 .datainput {
     padding: .75rem 1rem;
     border: 1px solid #ffffff;
-    border-radius: 5px;
+    border-radius: 7px;
     color: var(--text);
     font-size: .875rem;
     line-height: 1.25rem;
     background-color: var(--background);
-    margin: .5em;
     outline: 0;
-    width: calc(100% - 3em - 2px);
+    width: calc(100% - 1px);
     transition: border .8s;
     box-shadow: var(--box-shadow);
 
@@ -505,6 +510,22 @@ body {
     transition: all 0.2s ease;
     text-decoration: none;
     min-height: 36px;
+}
+
+.btn:hover {
+    background-color: rgba(33, 149, 243, 0.158);
+}
+
+.codemao-renderer.dark-theme .blocklyNonEditableText>rect:not(.blocklyDropdownRect),
+.codemao-renderer.dark-theme .blocklyEditableText>rect:not(.blocklyDropdownRect) {
+    fill: #383838;
+}
+
+.codemao-renderer.dark-theme .blocklyNonEditableText>text,
+.codemao-renderer.dark-theme .blocklyEditableText>text,
+.codemao-renderer.dark-theme .blocklyNonEditableText>g>text,
+.codemao-renderer.dark-theme .blocklyEditableText>g>text {
+    fill: #ffffff;
 }
 
 .btn-primary {
@@ -775,7 +796,7 @@ body {
 
 /* 导航栏样式 */
 .navbar .dropdown-toggle {
-    color: #383838 !important;
+    color: #383838;
     background: none;
     border: none;
     padding: 8px 12px;
@@ -891,7 +912,7 @@ body {
 .blcokly-action-buttons {
     position: absolute;
     right: 30px;
-    width: 56px;
+    width: 50px;
     padding: 4px 4px;
     bottom: 28px;
     background-color: white;
@@ -1321,7 +1342,7 @@ body {
 
 /* 导航栏样式 */
 .navbar .dropdown-toggle {
-    color: #383838 !important;
+    color: #383838;
     background: none;
     border: none;
     padding: 8px 12px;
@@ -1946,7 +1967,7 @@ body {
 
 /* 导航栏样式 */
 .navbar .dropdown-toggle {
-    color: #383838 !important;
+    color: #383838;
     background: none;
     border: none;
     padding: 8px 12px;
@@ -2492,7 +2513,7 @@ body {
 
 /* 导航栏样式 */
 .navbar .dropdown-toggle {
-    color: #383838 !important;
+    color: #383838;
     background: none;
     border: none;
     padding: 8px 12px;
@@ -2896,6 +2917,7 @@ body {
     margin-left: -24px;
     position: static;
 }
+
 .goog-menuitem-highlight {
     background-color: #f0f0f0;
 }
@@ -3236,7 +3258,7 @@ body {
 
 /* 导航栏样式 */
 .navbar .dropdown-toggle {
-    color: #383838 !important;
+    color: #383838;
     background: none;
     border: none;
     padding: 8px 12px;
@@ -3782,7 +3804,7 @@ body {
 
 /* 导航栏样式 */
 .navbar .dropdown-toggle {
-    color: #383838 !important;
+    color: #383838;
     background: none;
     border: none;
     padding: 8px 12px;
@@ -3796,7 +3818,7 @@ body {
 
 .navbar .dropdown-menu {
     margin-top: 0px;
-
+    z-index: 999999999999999999999999;
     flex-direction: column;
     gap: 6px;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -4074,7 +4096,7 @@ body {
 
 .complete-modal h3 {
     margin: 0 0 10px 0;
-    color: #333;
+
     font-size: 20px;
     font-weight: 600;
     text-align: start;

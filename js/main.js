@@ -209,7 +209,7 @@ function runcode() {
     $("#look").css("width", "27.5%");
   } else {
     $("#mask").css("display", "none");
-    $("#look").css("width", "21.5%");
+    $("#look").css("width", "27.5%");
   }
 
   $("#look_pos").toggle();
@@ -218,8 +218,11 @@ function runcode() {
     isrun = 1;
     beforerun = document.getElementById("look_html").srcdoc;
     $("#runcode").css("background-color", "#ff4d4f");
+    // 运行代码时恢复预览区交互
+    $("#look").css("pointer-events", "auto");
+    $("#look").css("cursor", "default");
     $("#runcode").html(`<s-icon slot="start"
-                        style="color: white; margin-right: 4px; margin-bottom: 2px; width: 20px; height: 20px;">
+                        style="color: white; margin-right: 4px; width: 20px; height: 20px;">
                         <svg t="1724751769826" class="icon" viewBox="0 0 1024 1024" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" p-id="8659" width="512" height="512">
                             <path
@@ -231,8 +234,11 @@ function runcode() {
     isrun = 0;
     document.getElementById("look_html").srcdoc = beforerun;
     $("#runcode").css("background-color", "#3395FE");
+    // 停止运行时禁止预览区交互
+    $("#look").css("pointer-events", "none");
+    $("#look").css("cursor", "not-allowed");
     $("#runcode").html(`<s-icon slot="start"
-                        style="color: white; margin-right: 4px; margin-bottom: 2px; width: 20px; height: 20px;">
+                        style="color: white; margin-right: 4px; width: 20px; height: 20px;">
                         <svg t="1724751769826" class="icon" viewBox="0 0 1024 1024" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" p-id="8659" width="512" height="512">
                             <path
@@ -246,6 +252,12 @@ function runcode() {
 $(document).ready(function () {
 
   $("#blocklyDiv").css("margin-top", "56px");
+  
+  // 初始状态：未运行时禁止预览区交互
+  if (isrun === 0) {
+    $("#look").css("pointer-events", "none");
+    $("#look").css("cursor", "not-allowed");
+  }
 
   $("#save").click(function () {
 
@@ -508,7 +520,7 @@ $(document).ready(function () {
   $("#copycode").click(function () {
     let transfer = document.createElement("textarea");
     document.body.appendChild(transfer);
-    transfer.value = document.getElementById("code").innerText;
+    transfer.value = document.getElementById("code-content").innerText;
     transfer.focus();
     transfer.select();
     document.execCommand("copy");
@@ -523,6 +535,44 @@ $(document).ready(function () {
   });
 
   $("#code_open").click(function () {
+    console.log('🔧 点击了生成代码按钮');
+    console.log('🔧 workspace对象:', workspace);
+    console.log('🔧 Blockly.JavaScript对象:', Blockly.JavaScript);
+    const codediv = document.getElementById('code');
+    codediv.style.display = 'block';
+    
+    // 检查工作区中的积木块
+    var topBlocks = workspace.getTopBlocks();
+    console.log('🔧 工作区顶级积木块数量:', topBlocks.length);
+    console.log('🔧 顶级积木块:', topBlocks);
+    
+    // 生成代码
+    try {
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      console.log('🔧 生成的代码:', code);
+      console.log('🔧 代码长度:', code ? code.length : 0);
+      
+      var codeElement = $("#code-content");
+      console.log('🔧 代码显示元素:', codeElement);
+      console.log('🔧 代码显示元素长度:', codeElement.length);
+      
+      codeElement.text(code || '// 没有积木块，无法生成代码');
+      console.log('🔧 代码已设置到元素中');
+      
+      // 触发语法高亮和行号
+      setTimeout(() => {
+        if (typeof Prism !== 'undefined') {
+          Prism.highlightAll();
+          // 重新初始化行号
+          if (Prism.plugins.lineNumbers) {
+            Prism.plugins.lineNumbers.resize();
+          }
+        }
+      }, 100);
+    } catch (error) {
+      console.error('🔧 代码生成错误:', error);
+      $("#code-content").text('// 代码生成失败: ' + error.message);
+    }
     $("#codefa").toggle();
   });
 
